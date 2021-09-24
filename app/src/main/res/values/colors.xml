@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="base_price_down">#1ABB9C</color>
+    <color name="base_price_up">#FF5261</color>
+    <color name="base_price_normal">#222222</color>
+    <color name="base_color_process">#FFA800</color>
+    <color name="base_dialog_tip_button">#3D83CF</color>
+    <color name="base_blue">#007AFF</color>
+    <color name="base_line">#803D83CF</color>
+    <color name="none">#00000000</color>
+
+    <!--按钮相关-->
+    <color name="base_button_title">#FFFFFFFF</color>
+    <color name="base_color_button_disable">#BCC3CC</color>
+    <color name="base_color_button_bg">#2D64F6</color>
+    <color name="base_color_button_press">#802D64F6</color>
+</resources>

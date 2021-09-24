@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="title">16dp</dimen>
+    <dimen name="text">14dp</dimen>
+    <dimen name="des">12dp</dimen>
+    <dimen name="tip">10dp</dimen>
+    <!--按钮圆角-->
+    <dimen name="base_button_corner_radius">8dp</dimen>
+</resources>

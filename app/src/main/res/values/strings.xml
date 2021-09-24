@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">DefiTool</string>
+    <string name="address_copied">Address Copied</string>
+    <string name="approve">Approve</string>
+    <string name="swap">Swap</string>
+    <string name="refresh_transaction">Refresh Transaction</string>
+    <string name="refresh_transaction_dex">The App is Refreshing Dex Transaction for you</string>
+</resources>

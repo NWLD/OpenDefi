@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">DefiTool</string>
+    <string name="address_copied">地址已复制</string>
+</resources>
