@@ -3,7 +3,6 @@ package com.nwld.defi.tools.web3;
 import com.nwld.defi.tools.entity.Chain;
 import com.nwld.defi.tools.entity.Gas;
 import com.nwld.defi.tools.entity.MyTransaction;
-import com.nwld.defi.tools.util.LogUtil;
 
 import org.web3j.abi.FunctionEncoder;
 import org.web3j.abi.datatypes.Function;
@@ -75,9 +74,6 @@ public class Web3Util {
             throws Exception {
         String encodedFunction = FunctionEncoder.encode(myTransaction.function);
         myTransaction.encodedFunction = encodedFunction;
-        LogUtil.e("from", myTransaction.from);
-        LogUtil.e("encodedFunction", encodedFunction);
-        LogUtil.e("contractAddress", myTransaction.contract);
         Web3j web3j = getWeb3j(myTransaction.chain);
         EthEstimateGas ethEstimateGas = web3j.ethEstimateGas(Transaction.createEthCallTransaction(
                 myTransaction.from, myTransaction.contract, encodedFunction)).sendAsync().get();
@@ -85,10 +81,7 @@ public class Web3Util {
                 web3j.ethGasPrice().sendAsync().get();
         Gas gas = new Gas();
         gas.gasPrice = ethGasPrice.getGasPrice();
-        LogUtil.e("ethEstimateGasError", ethEstimateGas.hasError());
         if (ethEstimateGas.hasError()) {
-            LogUtil.e("getError", "code=" + ethEstimateGas.getError().getCode()
-                    + ",msg=" + ethEstimateGas.getError().getMessage() + ",data=" + ethEstimateGas.getError().getData());
             throw new Exception("code=" + ethEstimateGas.getError().getCode()
                     + ",msg=" + ethEstimateGas.getError().getMessage());
         } else {
@@ -117,8 +110,6 @@ public class Web3Util {
         EthSendTransaction transactionResponse =
                 web3j.ethSendRawTransaction(hexValue).sendAsync().get();
         if (transactionResponse.hasError()) {
-            LogUtil.e("transactionError", "code=" + transactionResponse.getError().getCode()
-                    + ",msg=" + transactionResponse.getError().getMessage() + ",data=" + transactionResponse.getError().getData());
             throw new Exception("code=" + transactionResponse.getError().getCode()
                     + ",msg=" + transactionResponse.getError().getMessage());
         }
@@ -139,8 +130,6 @@ public class Web3Util {
                         .sendAsync()
                         .get();
         if (response.hasError()) {
-            LogUtil.e("callSmartContractFunctionError", "code=" + response.getError().getCode()
-                    + ",msg=" + response.getError().getMessage() + ",data=" + response.getError().getData());
             throw new Exception("code=" + response.getError().getCode()
                     + ",msg=" + response.getError().getMessage());
         }

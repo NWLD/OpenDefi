@@ -18,7 +18,6 @@ import com.nwld.defi.tools.entity.ERC20;
 import com.nwld.defi.tools.entity.SwapPair;
 import com.nwld.defi.tools.ui.SchemeActivity;
 import com.nwld.defi.tools.util.CalcUtils;
-import com.nwld.defi.tools.util.LogUtil;
 import com.nwld.defi.tools.util.StringUtil;
 
 public class NotifyManager {
@@ -63,8 +62,6 @@ public class NotifyManager {
                         .build();
                 NotificationManager manager = (NotificationManager) MyApp.getContext().getSystemService(Context.NOTIFICATION_SERVICE);
                 manager.notify(notifyId++, notification);
-                LogUtil.e("showNewPair", notifyId);
-                LogUtil.e("FindSwapPair", "pair = " + swapPair.address + ", token0 = " + token0.address + ", token1 =  " + token1.address + ", " + text);
             }
         });
     }

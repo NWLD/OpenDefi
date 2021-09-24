@@ -1,18 +1,23 @@
 package com.nwld.defi.tools.model;
 
+import com.nwld.defi.tools.MyApp;
 import com.nwld.defi.tools.async.BaseExecutor;
 import com.nwld.defi.tools.async.BaseTask;
 import com.nwld.defi.tools.async.MainHandler;
+import com.nwld.defi.tools.constant.IntentConstant;
 import com.nwld.defi.tools.entity.Chain;
 import com.nwld.defi.tools.entity.ERC20;
 import com.nwld.defi.tools.entity.Swap;
 import com.nwld.defi.tools.entity.SwapPair;
 import com.nwld.defi.tools.manager.ERC20Manager;
 import com.nwld.defi.tools.manager.NotifyManager;
+import com.nwld.defi.tools.manager.SwapPairWatchManager;
 import com.nwld.defi.tools.repository.ERC20Repository;
 import com.nwld.defi.tools.repository.SwapFactoryRepository;
 import com.nwld.defi.tools.repository.SwapPairRepository;
 import com.nwld.defi.tools.util.LogUtil;
+import com.nwld.defi.tools.util.SPUtil;
+import com.nwld.defi.tools.util.StringUtil;
 
 import java.math.BigInteger;
 
@@ -27,6 +32,11 @@ public class SwapPairFindModel {
         this.chain = chain;
         this.swap = swap;
         this.erc20Model = erc20Model;
+        String fileName = SwapPairWatchManager.swapFileName(swap);
+        String lastLength = SPUtil.get(MyApp.getContext(), fileName, IntentConstant.lastLength);
+        if (!StringUtil.isEmpty(lastLength)) {
+            this.lastLength = StringUtil.str2Int(lastLength);
+        }
     }
 
     private boolean loadingList;
@@ -48,13 +58,11 @@ public class SwapPairFindModel {
                     }
                     int index = lastLength;
                     lastLength = len;
+                    String fileName = SwapPairWatchManager.swapFileName(swap);
+                    SPUtil.set(MyApp.getContext(), fileName, IntentConstant.lastLength, lastLength + "");
                     //这里只拉取新增的交易对
                     if (0 == index) {
-                        index = len - 10;
-                        if (0 > index) {
-                            index = 0;
-                        }
-//                        return;
+                        return;
                     }
                     for (; index < len; index++) {
                         SwapPair swapPair = new SwapPair();
@@ -105,7 +113,6 @@ public class SwapPairFindModel {
                     if (swapPair.token0InitBalance.equals(BigInteger.ZERO)
                             && swapPair.token1InitBalance.equals(BigInteger.ZERO)) {
                         Thread.sleep(3000);
-                        LogUtil.e("getPairInfoBalance", "2");
                         service.erc20Address = swapPair.token0;
                         swapPair.token0Balance = service.balanceOf(swapPair.address);
                         service.erc20Address = swapPair.token1;
@@ -117,7 +124,6 @@ public class SwapPairFindModel {
                 } catch (Exception e) {
                     e.printStackTrace();
                     repeatGetPairInfo(swapPair);
-                    LogUtil.e("getPairInfoError", swapPair);
                 }
             }
         });

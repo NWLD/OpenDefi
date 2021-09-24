@@ -40,7 +40,6 @@ public class AESUtil {
             byte[] result = decrypt(rawKey, enc, iv);
             // /result = Base64.decode(result, Base64.DEFAULT);
             String dec = SecurityUtil.toHex(result);
-            LogUtil.e("dec", dec);
             return dec;
         } catch (Exception e) {
             e.printStackTrace();
@@ -98,7 +97,6 @@ public class AESUtil {
         // 生成一个可信任的随机数源
         SecureRandom sr = new SecureRandom();
         byte[] iv = sr.generateSeed(16);
-        LogUtil.e("iv", SecurityUtil.toHex(iv));
         return iv;
     }
 

@@ -7,7 +7,6 @@ import com.nwld.defi.tools.entity.Gas;
 import com.nwld.defi.tools.entity.MyTransaction;
 import com.nwld.defi.tools.entity.Swap;
 import com.nwld.defi.tools.repository.SwapRouterRepository;
-import com.nwld.defi.tools.util.LogUtil;
 import com.nwld.defi.tools.web3.Web3Util;
 
 import org.web3j.abi.datatypes.Function;
@@ -38,7 +37,6 @@ public class SwapRouterModel {
                     myTransaction.function = function;
                     myTransaction.chain = chain;
                     Gas gas = Web3Util.getInstance().ethEstimateGas(myTransaction);
-                    LogUtil.e("hash", gas);
                 } catch (Exception e) {
                     e.printStackTrace();
                 } finally {
@@ -55,7 +53,6 @@ public class SwapRouterModel {
                 try {
                     SwapRouterRepository service = new SwapRouterRepository(chain, swap);
                     BigInteger out = service.getAmountsOut(in, path);
-                    LogUtil.e("getAmountsOut", out);
                 } catch (Exception e) {
                     e.printStackTrace();
                 } finally {

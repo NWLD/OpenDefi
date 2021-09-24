@@ -8,7 +8,6 @@ import android.view.MotionEvent;
 import com.nwld.defi.tools.MyApp;
 import com.nwld.defi.tools.constant.IntentConstant;
 import com.nwld.defi.tools.service.RunningService;
-import com.nwld.defi.tools.util.LogUtil;
 import com.nwld.defi.tools.util.StringUtil;
 
 public class SchemeActivity extends BaseActivity {
@@ -25,12 +24,14 @@ public class SchemeActivity extends BaseActivity {
         }
         Intent intent = getIntent();
         if (intent != null) {
+            String json = intent.getStringExtra(IntentConstant.NOTIFY_DATA);
             Uri dataUri = intent.getData();
             if (null != dataUri) {
                 String scheme = dataUri.getScheme();
                 if (StringUtil.ignoreE(IntentConstant.newSwapPair, scheme)) {
-                    String json = intent.getStringExtra(IntentConstant.NOTIFY_DATA);
-                    LogUtil.e("NOTIFY_DATA", json);
+                    Intent detail = new Intent(this, SwapPairDetailActivity.class);
+                    detail.putExtra(IntentConstant.JSON_DATA, json);
+                    startActivity(detail);
                 }
             }
         }

@@ -42,7 +42,7 @@ public class ChainConstant {
             Chain BNB = BNB(isFirstWatch);
             chainList.add(BNB);
             chainMap.put(BNB.symbol, BNB);
-//
+
 //            Chain ETH = ETH(isFirstWatch);
 //            chainList.add(ETH);
 //            chainMap.put(ETH.symbol, ETH);
@@ -50,7 +50,9 @@ public class ChainConstant {
         return chainList;
     }
 
-    //
+    public static Chain chain(String symbol) {
+        return chainMap.get(symbol);
+    }
 
     private static Chain CELO(boolean isFirstWatch) {
         Chain CELO = new Chain();
@@ -105,18 +107,18 @@ public class ChainConstant {
         BNB.symbol = "BNB";
         BNB.decimals = 18;
 
-//        Swap pancakeSwap = new Swap();
-//        pancakeSwap.chain = BNB;
-//        pancakeSwap.name = "PancakeSwap";
-//        pancakeSwap.tokenSymbol = "CAKE";
-//        pancakeSwap.swapFactoryAddress = "0xcA143Ce32Fe78f1f7019d7d551a6402fC5350c73";
-//        pancakeSwap.swapRouterAddress = "0x10ED43C718714eb63d5aA57B78B54704E256024E";
-//        if (isFirstWatch) {
-//            JSONArray pairList = new JSONArray();
-//            pairList.put("0x16b9a82891338f9ba80e2d6970fdda79d1eb0dae");
-//            SPUtil.set(MyApp.getContext(), SwapPairWatchManager.swapFileName(pancakeSwap), IntentConstant.pairs, pairList.toString());
-//        }
-//        BNB.addSwap(pancakeSwap);
+        Swap pancakeSwap = new Swap();
+        pancakeSwap.chain = BNB;
+        pancakeSwap.name = "PancakeSwap";
+        pancakeSwap.tokenSymbol = "CAKE";
+        pancakeSwap.swapFactoryAddress = "0xcA143Ce32Fe78f1f7019d7d551a6402fC5350c73";
+        pancakeSwap.swapRouterAddress = "0x10ED43C718714eb63d5aA57B78B54704E256024E";
+        if (isFirstWatch) {
+            JSONArray pairList = new JSONArray();
+            pairList.put("0x16b9a82891338f9ba80e2d6970fdda79d1eb0dae");
+            SPUtil.set(MyApp.getContext(), SwapPairWatchManager.swapFileName(pancakeSwap), IntentConstant.pairs, pairList.toString());
+        }
+        BNB.addSwap(pancakeSwap);
 
         Swap wfcSwap = new Swap();
         wfcSwap.chain = BNB;

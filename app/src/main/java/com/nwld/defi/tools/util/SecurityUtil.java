@@ -143,7 +143,6 @@ public class SecurityUtil {
     }
 
     public static String decryptByShaHex(String key, String encrypted) {
-        LogUtil.e("decryptByShaHex", "key=" + key + ",encrypted=" + encrypted);
         try {
             byte[] rawKey = toByte(key);// key.getBytes();
             byte[] enc = toByte(encrypted);
@@ -151,7 +150,6 @@ public class SecurityUtil {
             byte[] result = decrypt(rawKey, enc);
             // /result = Base64.decode(result, Base64.DEFAULT);
             String dec = new String(result, "utf-8");
-            LogUtil.e("dec", dec);
             return dec;
         } catch (Exception e) {
             e.printStackTrace();

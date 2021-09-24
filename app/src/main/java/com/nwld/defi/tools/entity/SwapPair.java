@@ -1,8 +1,13 @@
 package com.nwld.defi.tools.entity;
 
+import com.nwld.defi.tools.constant.ChainConstant;
+import com.nwld.defi.tools.util.StringUtil;
+
 import org.json.JSONObject;
 
 import java.math.BigInteger;
+import java.util.List;
+import java.util.Spliterator;
 
 public class SwapPair {
     public String address;
@@ -33,12 +38,38 @@ public class SwapPair {
             jsonObject.put("timeStamp", timeStamp);
             jsonObject.put("token0InitBalance", token0InitBalance.toString());
             jsonObject.put("token1InitBalance", token1InitBalance.toString());
-            jsonObject.put("token0Balance", token0Balance.toString());
-            jsonObject.put("token1Balance", token1Balance.toString());
             return jsonObject.toString();
         } catch (Exception e) {
             e.printStackTrace();
             return "";
+        }
+    }
+
+    public static SwapPair fromJson(String json) {
+        SwapPair swapPair = new SwapPair();
+        try {
+            JSONObject jsonObject = new JSONObject(json);
+            swapPair.address = jsonObject.getString("address");
+            swapPair.token0 = jsonObject.getString("token0");
+            swapPair.token1 = jsonObject.getString("token1");
+            swapPair.timeStamp = jsonObject.getLong("timeStamp");
+            swapPair.token0InitBalance = new BigInteger(jsonObject.getString("token0InitBalance"));
+            swapPair.token1InitBalance = new BigInteger(jsonObject.getString("token1InitBalance"));
+            swapPair.token0Balance = swapPair.token0InitBalance;
+            swapPair.token1Balance = swapPair.token1InitBalance;
+            swapPair.chain = ChainConstant.chain(jsonObject.getString("chain"));
+            String swap = jsonObject.getString("swap");
+            List<Swap> swapList = swapPair.chain.swapList;
+            for (int index = 0; index < swapList.size(); index++) {
+                if (StringUtil.ignoreE(swap, swapList.get(index).name)) {
+                    swapPair.swap = swapList.get(index);
+                    break;
+                }
+            }
+            return swapPair;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
         }
     }
 

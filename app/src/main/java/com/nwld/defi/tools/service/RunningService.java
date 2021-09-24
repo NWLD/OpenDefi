@@ -21,7 +21,6 @@ import com.nwld.defi.tools.R;
 import com.nwld.defi.tools.manager.SwapPairFindManager;
 import com.nwld.defi.tools.manager.SwapPairWatchManager;
 import com.nwld.defi.tools.ui.SchemeActivity;
-import com.nwld.defi.tools.util.LogUtil;
 
 public class RunningService extends Service implements MediaPlayer.OnCompletionListener {
     private final String CHANNEL_TRANSACTION = "transaction";
@@ -86,7 +85,6 @@ public class RunningService extends Service implements MediaPlayer.OnCompletionL
     }
 
     public void startForeground() {
-        LogUtil.e("startForeground", "startForeground");
         Intent notificationIntent = new Intent(this, SchemeActivity.class);
         PendingIntent pendingIntent =
                 PendingIntent.getActivity(this, 0, notificationIntent, 0);
