@@ -1,27 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/item_layout"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:orientation="vertical">
 
     <LinearLayout
+        android:id="@+id/base_title_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/bg_list_item"
-        android:orientation="vertical"
-        android:padding="10dp">
+        android:orientation="horizontal"
+        android:layout_height="40dp">
+
+        <LinearLayout
+            android:id="@+id/base_back_layout"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/base_back_icon"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:src="@mipmap/base_icon_back_white" />
+
+        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/item_pair_info_layout"
-            android:layout_width="match_parent"
-            android:orientation="vertical"
-            android:layout_marginBottom="6dp"
-            android:layout_height="wrap_content">
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
@@ -30,31 +44,43 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:singleLine="true"
-                    android:textColor="@color/base_price_normal"
-                    android:textSize="@dimen/text" />
+                    android:textColor="@color/base_button_title"
+                    android:textSize="@dimen/des" />
 
                 <TextView
                     android:id="@+id/item_pair_add_time"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="right"
                     android:singleLine="true"
+                    android:layout_marginLeft="20dp"
                     android:textColor="@color/base_price_up"
-                    android:textSize="@dimen/text" />
+                    android:textSize="@dimen/des" />
 
             </LinearLayout>
 
             <TextView
                 android:id="@+id/item_pair_address"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:singleLine="true"
-                android:textColor="@color/base_price_normal"
+                android:textColor="@color/base_button_title"
                 android:textSize="@dimen/des" />
 
         </LinearLayout>
 
+        <View
+            android:layout_width="40dp"
+            android:layout_height="40dp"/>
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/bg_list_item"
+        android:orientation="vertical"
+        android:padding="10dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -118,38 +144,15 @@
                     android:singleLine="true"
                     android:textSize="@dimen/des" />
 
-                <LinearLayout
+                <TextView
+                    android:id="@+id/item_token0_price"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:singleLine="true"
                     android:layout_marginTop="6dp"
-                    android:orientation="horizontal"
-                    android:paddingRight="10dp"
-                    android:visibility="gone">
+                    android:textColor="@color/base_blue"
+                    android:textSize="@dimen/des" />
 
-                    <TextView
-                        android:id="@+id/item_token0_approve"
-                        android:layout_width="0dp"
-                        android:layout_height="32dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/base_button"
-                        android:gravity="center"
-                        android:text="@string/approve"
-                        android:textColor="@color/base_button_title"
-                        android:textSize="@dimen/text" />
-
-                    <TextView
-                        android:id="@+id/item_token0_swap"
-                        android:layout_width="0dp"
-                        android:layout_height="32dp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/base_button"
-                        android:gravity="center"
-                        android:text="@string/swap"
-                        android:textColor="@color/base_button_title"
-                        android:textSize="@dimen/text" />
-
-                </LinearLayout>
 
             </LinearLayout>
 
@@ -215,15 +218,203 @@
                     android:singleLine="true"
                     android:textSize="@dimen/des" />
 
+                <TextView
+                    android:id="@+id/item_token1_price"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:layout_marginTop="6dp"
+                    android:textColor="@color/base_blue"
+                    android:textSize="@dimen/des" />
+
             </LinearLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/item_pair_add_watch"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/base_button"
+            android:gravity="center"
+            android:text="@string/add_to_watch"
+            android:textColor="@color/base_button_title"
+            android:textSize="@dimen/text" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/bg_list_item"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/item_token0_my_balance"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:textColor="@color/base_blue"
+                android:textSize="@dimen/text" />
+
+            <EditText
+                android:id="@+id/item_token0_out"
+                android:layout_width="match_parent"
+                android:layout_height="32dp"
+                android:layout_marginTop="6dp"
+                android:background="@drawable/base_edit"
+                android:gravity="center_vertical"
+                android:inputType="numberDecimal"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:singleLine="true"
+                android:textSize="@dimen/text" />
+
+            <TextView
+                android:id="@+id/item_token0_out_symbol"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:gravity="right"
+                android:singleLine="true"
+                android:textColor="@color/des"
+                android:textSize="@dimen/des" />
+
+            <TextView
+                android:id="@+id/item_token1_in"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:background="@drawable/base_bottom_line"
+                android:singleLine="true"
+                android:textColor="@color/des"
+                android:textSize="@dimen/text" />
+
+            <TextView
+                android:id="@+id/item_token1_in_symbol"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:gravity="right"
+                android:singleLine="true"
+                android:textColor="@color/des"
+                android:textSize="@dimen/des" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
                 android:orientation="horizontal"
+                android:paddingRight="10dp">
+
+                <TextView
+                    android:id="@+id/item_token0_approve"
+                    android:layout_width="0dp"
+                    android:layout_height="32dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/base_button"
+                    android:gravity="center"
+                    android:text="@string/approve"
+                    android:textColor="@color/base_button_title"
+                    android:textSize="@dimen/text" />
+
+                <TextView
+                    android:id="@+id/item_token0_swap"
+                    android:layout_width="0dp"
+                    android:layout_height="32dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/base_button"
+                    android:gravity="center"
+                    android:text="@string/swap"
+                    android:textColor="@color/base_button_title"
+                    android:textSize="@dimen/text" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_list_item"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/item_token1_my_balance"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:textColor="@color/des"
+                android:textSize="@dimen/text" />
+
+            <EditText
+                android:id="@+id/item_token1_out"
+                android:layout_width="match_parent"
+                android:layout_height="32dp"
+                android:layout_marginTop="6dp"
+                android:background="@drawable/base_edit"
+                android:gravity="center_vertical"
+                android:inputType="numberDecimal"
                 android:paddingLeft="10dp"
-                android:visibility="gone">
+                android:paddingRight="10dp"
+                android:singleLine="true"
+                android:textSize="@dimen/text" />
+
+            <TextView
+                android:id="@+id/item_token1_out_symbol"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:gravity="right"
+                android:singleLine="true"
+                android:textColor="@color/des"
+                android:textSize="@dimen/des" />
+
+            <TextView
+                android:id="@+id/item_token0_in"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:background="@drawable/base_bottom_line"
+                android:singleLine="true"
+                android:textColor="@color/des"
+                android:textSize="@dimen/text" />
+
+            <TextView
+                android:id="@+id/item_token0_in_symbol"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:gravity="right"
+                android:singleLine="true"
+                android:textColor="@color/des"
+                android:textSize="@dimen/des" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:orientation="horizontal"
+                android:paddingLeft="10dp">
+
 
                 <TextView
                     android:id="@+id/item_token1_approve"
@@ -252,47 +443,6 @@
 
         </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/item_pair_price_layout"
-                android:layout_width="match_parent"
-                android:orientation="vertical"
-                android:layout_marginTop="6dp"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:id="@+id/item_token0_price"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:singleLine="true"
-                    android:textColor="@color/base_blue"
-                    android:textSize="@dimen/text" />
-
-                <TextView
-                    android:id="@+id/item_token1_price"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:singleLine="true"
-                    android:textColor="@color/base_blue"
-                    android:textSize="@dimen/text" />
-
-            </LinearLayout>
-
-        <TextView
-            android:id="@+id/item_pair_add_watch"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:background="@drawable/base_button"
-            android:gravity="center"
-            android:layout_marginTop="16dp"
-            android:text="@string/add_to_watch"
-            android:textColor="@color/base_button_title"
-            android:textSize="@dimen/text" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1px" />
-
     </LinearLayout>
-
 
 </LinearLayout>

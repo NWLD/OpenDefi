@@ -5,6 +5,7 @@
     <string name="approve">Approve</string>
     <string name="swap">Swap</string>
     <string name="add_to_watch">Add to watch</string>
+    <string name="remove_from_watch">Remove from watch</string>
     <string name="refresh_transaction">Refresh Transaction</string>
     <string name="refresh_transaction_dex">The App is Refreshing Dex Transaction for you</string>
 </resources>

@@ -50,7 +50,8 @@ public class SwapRouterRepository {
         List<Type> response =
                 FunctionReturnDecoder.decode(responseValue, function.getOutputParameters());
         DynamicArray<Uint256> array = (DynamicArray<Uint256>) response.get(0);
-        return array.getValue().get(0).getValue();
+        List<Uint256> outs = array.getValue();
+        return outs.get(outs.size() - 1).getValue();
     }
 
     public Function swapExactTokensForTokensSupportingFeeOnTransferTokensFun(

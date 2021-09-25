@@ -2,12 +2,12 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/base_title_layout"
     android:layout_width="match_parent"
-    android:layout_height="44dp">
+    android:layout_height="40dp">
 
     <LinearLayout
         android:id="@+id/base_back_layout"
-        android:layout_width="44dp"
-        android:layout_height="44dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:gravity="center"
         android:orientation="vertical">
 

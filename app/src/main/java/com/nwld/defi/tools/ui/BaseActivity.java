@@ -5,9 +5,12 @@ import android.content.pm.ActivityInfo;
 import android.content.res.TypedArray;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.MotionEvent;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.nwld.defi.tools.util.KeyBoardUtils;
 import com.nwld.defi.tools.util.LogUtil;
 
 import java.lang.reflect.Field;
@@ -65,5 +68,52 @@ public abstract class BaseActivity extends AppCompatActivity {
             boolean result = fixOrientation();
         }
         super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    protected void onDestroy() {
+        KeyBoardUtils.hideInputForce(this);
+        super.onDestroy();
+    }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        float x = ev.getX();
+        float y = ev.getY();
+        int action = ev.getAction();
+        if (action == MotionEvent.ACTION_DOWN) {
+            if (isTouchView(filterViews(), ev)) {
+                return super.dispatchTouchEvent(ev);
+            }
+            KeyBoardUtils.hideInputForce(this);
+            View v = getCurrentFocus();
+            if (null != v) {
+                v.clearFocus();
+            }
+        }
+        return super.dispatchTouchEvent(ev);
+    }
+
+    //是否触摸在指定view上面,对某个控件过滤
+    public boolean isTouchView(View[] views, MotionEvent ev) {
+        if (views == null || views.length == 0) return false;
+        int[] location = new int[2];
+        for (View view : views) {
+            if (null == view) {
+                continue;
+            }
+            view.getLocationOnScreen(location);
+            int x = location[0];
+            int y = location[1];
+            if (ev.getX() > x && ev.getX() < (x + view.getWidth()) && ev.getY() > y && ev.getY() < (y + view.getHeight())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /*** 传入要过滤的View* 过滤之后点击将不会有隐藏软键盘的操作**@returnid 数组*/
+    public View[] filterViews() {
+        return null;
     }
 }

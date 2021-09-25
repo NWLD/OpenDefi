@@ -27,6 +27,10 @@ public class SwapPair {
     public Chain chain;//哪条链
     public Swap swap;//哪个交易所
 
+    public boolean inWatchList = true;//是否加入监控列表
+    public boolean pauseWatch = false;//暂停刷新数据，进入后台
+    public boolean stopWatch = false;//停止刷新数据，删除
+
     public String toJson() {
         JSONObject jsonObject = new JSONObject();
         try {
@@ -90,5 +94,9 @@ public class SwapPair {
                 ", chain=" + chain +
                 ", swap=" + swap +
                 '}';
+    }
+
+    public String key() {
+        return chain.symbol + "#" + swap.name + "#" + address.toLowerCase();
     }
 }

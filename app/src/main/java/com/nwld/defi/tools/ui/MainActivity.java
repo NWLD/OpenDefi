@@ -12,7 +12,7 @@ import com.nwld.defi.tools.service.RunningService;
 import com.nwld.defi.tools.ui.home.HomeFragment;
 import com.nwld.defi.tools.util.FragmentUtil;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

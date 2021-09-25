@@ -31,6 +31,7 @@ public class SwapPairWatchManager {
     private final MutableLiveData<Integer> swapPairData = new MutableLiveData<>();
     private final MutableLiveData<Integer> balanceData = new MutableLiveData<>();
     private final List<SwapPair> swapPairList = new ArrayList<>();
+    private final Map<String, SwapPair> swapPairMap = new HashMap<>();
 
     private static class ManagerHolder {
         private static final SwapPairWatchManager manager = new SwapPairWatchManager();
@@ -111,12 +112,42 @@ public class SwapPairWatchManager {
 
     public void addSwapPair(SwapPair swapPair, boolean add2WatchList) {
         if (add2WatchList) {
+            swapPair.inWatchList = true;
             synchronized (swapPairList) {
                 swapPairList.add(0, swapPair);
             }
             swapPairData.postValue(1);
         }
-        swapPairWatchModel(swapPair.chain).getPairInfo(swapPair);
+        synchronized (swapPairMap) {
+            if (null == swapPairMap.get(swapPair.key())) {
+                swapPairMap.put(swapPair.key(), swapPair);
+                swapPairWatchModel(swapPair.chain).getPairInfo(swapPair);
+            }
+        }
+    }
+
+    public SwapPair getSwapPair(String key) {
+        SwapPair swapPair;
+        synchronized (swapPairMap) {
+            swapPair = swapPairMap.get(key);
+        }
+        return swapPair;
+    }
+
+    public void removeSwapPair(SwapPair swapPair, boolean unWatch) {
+        boolean success;
+        synchronized (swapPairList) {
+            success = swapPairList.remove(swapPair);
+        }
+        if (success) {
+            swapPairData.postValue(1);
+        }
+        //不检测了，其实详情页只是从列表删了
+        if (unWatch) {
+            synchronized (swapPairMap) {
+                swapPairMap.remove(swapPair.key());
+            }
+        }
     }
 
     public List<SwapPair> getSwapPairList() {

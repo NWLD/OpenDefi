@@ -4,10 +4,10 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 
 import com.nwld.defi.tools.MyApp;
@@ -20,7 +20,6 @@ import com.nwld.defi.tools.manager.SwapPairWatchManager;
 import com.nwld.defi.tools.model.SwapRouterModel;
 import com.nwld.defi.tools.util.CalcUtils;
 import com.nwld.defi.tools.util.DateUtil;
-import com.nwld.defi.tools.util.DisplayUtil;
 import com.nwld.defi.tools.util.SPUtil;
 import com.nwld.defi.tools.util.StringUtil;
 import com.nwld.defi.tools.util.ToastUtil;
@@ -34,10 +33,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class SwapPairDetailActivity extends AppCompatActivity {
+public class SwapPairDetailActivity extends BaseActivity {
     Map<String, ERC20> erc20Map = new HashMap<>();
 
-    LinearLayout layout;
     LinearLayout pairInfoLayout;
     TextView pairInfoText;
     TextView addTimeText;
@@ -67,6 +65,18 @@ public class SwapPairDetailActivity extends AppCompatActivity {
 
     TextView addWatchText;
 
+    TextView token0MyBalanceText;
+    EditText token0OutEdit;
+    TextView token0OutSymbolText;
+    TextView token1InText;
+    TextView token1InSymbolText;
+
+    TextView token1MyBalanceText;
+    EditText token1OutEdit;
+    TextView token1OutSymbolText;
+    TextView token0InText;
+    TextView token0InSymbolText;
+
     private Activity activity;
 
     Observer<Integer> mapObserver;
@@ -80,15 +90,22 @@ public class SwapPairDetailActivity extends AppCompatActivity {
             finish();
             return;
         }
-        String json = intent.getStringExtra(IntentConstant.JSON_DATA);
-        if (StringUtil.isEmpty(json)) {
-            finish();
-            return;
-        }
-        swapPair = SwapPair.fromJson(json);
-        if (null == swapPair) {
-            finish();
-            return;
+        String key = intent.getStringExtra(IntentConstant.KEY);
+        //从列表过来
+        if (!StringUtil.isEmpty(key)) {
+            swapPair = SwapPairWatchManager.getInstance().getSwapPair(key);
+        } else {
+            String json = intent.getStringExtra(IntentConstant.JSON_DATA);
+            if (StringUtil.isEmpty(json)) {
+                finish();
+                return;
+            }
+            swapPair = SwapPair.fromJson(json);
+            if (null == swapPair) {
+                finish();
+                return;
+            }
+            swapPair.inWatchList = false;
         }
         SwapPairWatchManager.getInstance().addSwapPair(swapPair, false);
         erc20Map = ERC20Manager.getInstance().getErc20Map();
@@ -121,7 +138,6 @@ public class SwapPairDetailActivity extends AppCompatActivity {
     }
 
     private void initView(View itemView) {
-        layout = itemView.findViewById(R.id.item_layout);
         pairInfoLayout = itemView.findViewById(R.id.item_pair_info_layout);
         pairInfoText = itemView.findViewById(R.id.item_pair_info);
         addTimeText = itemView.findViewById(R.id.item_pair_add_time);
@@ -149,6 +165,33 @@ public class SwapPairDetailActivity extends AppCompatActivity {
         price1Text = itemView.findViewById(R.id.item_token1_price);
 
         addWatchText = itemView.findViewById(R.id.item_pair_add_watch);
+
+        token0MyBalanceText = itemView.findViewById(R.id.item_token0_my_balance);
+        token0OutEdit = itemView.findViewById(R.id.item_token0_out);
+        token0OutSymbolText = itemView.findViewById(R.id.item_token0_out_symbol);
+        token1InText = itemView.findViewById(R.id.item_token1_in);
+        token1InSymbolText = itemView.findViewById(R.id.item_token1_in_symbol);
+
+        token1MyBalanceText = itemView.findViewById(R.id.item_token1_my_balance);
+        token1OutEdit = itemView.findViewById(R.id.item_token1_out);
+        token1OutSymbolText = itemView.findViewById(R.id.item_token1_out_symbol);
+        token0InText = itemView.findViewById(R.id.item_token0_in);
+        token0InSymbolText = itemView.findViewById(R.id.item_token0_in_symbol);
+
+        pairAddressText.setText(swapPair.address);
+        pairInfoText.setText(swapPair.chain.symbol + " " + swapPair.swap.name + " LP");
+        if (0 == swapPair.timeStamp) {
+            addTimeText.setText("");
+        } else {
+            addTimeText.setText(DateUtil.getDateTime(swapPair.timeStamp));
+        }
+
+        findViewById(R.id.base_back_layout).setOnClickListener(new OneClickListener() {
+            @Override
+            public void onOneClick(View v) {
+                onBackPressed();
+            }
+        });
 
         pairInfoLayout.setOnClickListener(new OneClickListener() {
             @Override
@@ -232,9 +275,21 @@ public class SwapPairDetailActivity extends AppCompatActivity {
                     } else {
                         jsonArray = new JSONArray(json);
                     }
-                    jsonArray.put(swapPair.address);
+                    //在列表里，移除
+                    if (swapPair.inWatchList) {
+                        SwapPairWatchManager.getInstance().removeSwapPair(swapPair, false);
+                        for (int index = 0; index < jsonArray.length(); index++) {
+                            if (StringUtil.ignoreE(swapPair.address, jsonArray.getString(index))) {
+                                jsonArray.remove(index);
+                                break;
+                            }
+                        }
+                    } else {
+                        jsonArray.put(swapPair.address);
+                        SwapPairWatchManager.getInstance().addSwapPair(swapPair, true);
+                    }
+                    setItem();
                     SPUtil.set(MyApp.getContext(), fileName, IntentConstant.pairs, jsonArray.toString());
-                    SwapPairWatchManager.getInstance().addSwapPair(swapPair, true);
                 } catch (Exception e) {
                     e.printStackTrace();
                 } finally {
@@ -244,35 +299,20 @@ public class SwapPairDetailActivity extends AppCompatActivity {
     }
 
     public void setItem() {
-        int padding = DisplayUtil.dip2px(activity, 10);
-        layout.setPadding(padding, padding, padding, padding);
-        pairAddressText.setText(swapPair.address);
-        pairInfoText.setText(swapPair.chain.symbol + " " + swapPair.swap.name + " LP");
-        if (0 == swapPair.timeStamp) {
-            addTimeText.setText("");
+        if (swapPair.inWatchList) {
+            addWatchText.setBackgroundResource(R.drawable.base_warning_button);
+            addWatchText.setText(R.string.remove_from_watch);
         } else {
-            addTimeText.setText(DateUtil.getDateTime(swapPair.timeStamp));
+            addWatchText.setBackgroundResource(R.drawable.base_button);
+            addWatchText.setText(R.string.add_to_watch);
         }
-
-        symbol0Text.setText("");
-        address0Text.setText("");
-        initBalance0Text.setText("");
-        balance0Text.setText("");
-        balance0DiffText.setText("");
-        symbol1Text.setText("");
-        address1Text.setText("");
-        initBalance1Text.setText("");
-        balance1Text.setText("");
-        balance1DiffText.setText("");
-
-        price0Text.setText("");
-        price1Text.setText("");
-
         if (null != swapPair.token0) {
             address0Text.setText(swapPair.token0);
             ERC20 token0 = erc20Map.get(ERC20Manager.addressKey4Chain(swapPair.token0, swapPair.chain.symbol));
             if (null != token0) {
                 symbol0Text.setText(token0.symbol);
+                token0InSymbolText.setText(token0.symbol);
+                token0OutSymbolText.setText(token0.symbol);
                 //初始余额
                 if (null != swapPair.token0InitBalance) {
                     initBalance0Text.setText(StringUtil.trimZero(CalcUtils.decimals(swapPair.token0InitBalance, token0.decimals)));
@@ -302,6 +342,8 @@ public class SwapPairDetailActivity extends AppCompatActivity {
             ERC20 token1 = erc20Map.get(ERC20Manager.addressKey4Chain(swapPair.token1, swapPair.chain.symbol));
             if (null != token1) {
                 symbol1Text.setText(token1.symbol);
+                token1InSymbolText.setText(token1.symbol);
+                token1OutSymbolText.setText(token1.symbol);
                 //初始余额
                 if (null != swapPair.token1InitBalance) {
                     initBalance1Text.setText(StringUtil.trimZero(CalcUtils.decimals(swapPair.token1InitBalance, token1.decimals)));
@@ -326,7 +368,6 @@ public class SwapPairDetailActivity extends AppCompatActivity {
                 }
             }
         }
-
         if (null != swapPair.token0 && null != swapPair.token1) {
             ERC20 token0 = erc20Map.get(ERC20Manager.addressKey4Chain(swapPair.token0, swapPair.chain.symbol));
             ERC20 token1 = erc20Map.get(ERC20Manager.addressKey4Chain(swapPair.token1, swapPair.chain.symbol));
@@ -343,5 +384,11 @@ public class SwapPairDetailActivity extends AppCompatActivity {
                 }
             }
         }
+    }
+
+    @Override
+    public View[] filterViews() {
+        View[] views = {token0OutEdit, token1OutEdit};
+        return views;
     }
 }
