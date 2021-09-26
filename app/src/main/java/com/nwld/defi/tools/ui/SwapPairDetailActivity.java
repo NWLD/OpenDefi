@@ -16,18 +16,24 @@ import com.nwld.defi.tools.constant.IntentConstant;
 import com.nwld.defi.tools.entity.ERC20;
 import com.nwld.defi.tools.entity.SwapPair;
 import com.nwld.defi.tools.manager.ERC20Manager;
+import com.nwld.defi.tools.manager.KeyManager;
 import com.nwld.defi.tools.manager.SwapPairWatchManager;
 import com.nwld.defi.tools.model.SwapRouterModel;
+import com.nwld.defi.tools.ui.login.LoginDialog;
 import com.nwld.defi.tools.util.CalcUtils;
 import com.nwld.defi.tools.util.DateUtil;
+import com.nwld.defi.tools.util.LogUtil;
 import com.nwld.defi.tools.util.SPUtil;
 import com.nwld.defi.tools.util.StringUtil;
 import com.nwld.defi.tools.util.ToastUtil;
 
 import org.json.JSONArray;
+import org.web3j.crypto.Credentials;
+import org.web3j.crypto.Keys;
 
 import java.math.BigInteger;
 import java.math.RoundingMode;
+import java.security.cert.Certificate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -81,6 +87,9 @@ public class SwapPairDetailActivity extends BaseActivity {
 
     Observer<Integer> mapObserver;
     Observer<Integer> balanceObserver;
+    Observer<Integer> keyObserver;
+
+    String walletAddress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -127,13 +136,31 @@ public class SwapPairDetailActivity extends BaseActivity {
             }
         };
         SwapPairWatchManager.getInstance().watchBalanceData(this, balanceObserver);
+        keyObserver = new Observer<Integer>() {
+            @Override
+            public void onChanged(Integer data) {
+                if (null != data && 1 == data) {
+                    getWalletAddressBalance();
+                }
+            }
+        };
+        KeyManager.getInstance().watchKeyData(this, keyObserver);
         setItem();
+        getWalletAddressBalance();
+    }
+
+    private void getWalletAddressBalance() {
+        walletAddress = getWalletAddress();
+        if (StringUtil.isEmpty(walletAddress)) {
+            return;
+        }
     }
 
     @Override
     protected void onDestroy() {
         ERC20Manager.getInstance().unWatchERC20Map(mapObserver);
         SwapPairWatchManager.getInstance().unWatchBalanceData(balanceObserver);
+        KeyManager.getInstance().unWatchKeyData(keyObserver);
         super.onDestroy();
     }
 
@@ -204,7 +231,11 @@ public class SwapPairDetailActivity extends BaseActivity {
         approve0View.setOnClickListener(new OneClickListener() {
             @Override
             public void onOneClick(View v) {
-
+                Credentials credentials = getCredentialsNullLogin();
+                if (null != credentials) {
+                    String address = Keys.toChecksumAddress(credentials.getAddress());
+                    LogUtil.e("login", address);
+                }
             }
         });
 
@@ -384,6 +415,24 @@ public class SwapPairDetailActivity extends BaseActivity {
                 }
             }
         }
+    }
+
+    private Credentials getCredentialsNullLogin() {
+        Credentials credentials = KeyManager.getInstance().getCredentials();
+        if (null == credentials) {
+            LoginDialog loginDialog = new LoginDialog(this);
+            loginDialog.show();
+            return null;
+        }
+        return credentials;
+    }
+
+    private String getWalletAddress() {
+        Credentials credentials = KeyManager.getInstance().getCredentials();
+        if (null == credentials) {
+            return null;
+        }
+        return Keys.toChecksumAddress(credentials.getAddress());
     }
 
     @Override

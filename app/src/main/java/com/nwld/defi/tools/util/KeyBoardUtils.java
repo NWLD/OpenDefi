@@ -47,4 +47,16 @@ public class KeyBoardUtils {
             imm.showSoftInput(view, 0);
         }
     }
+
+    public static void showSoftInput(Context context, EditText editText) {
+        editText.requestFocus();
+        InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.showSoftInput(editText, InputMethodManager.SHOW_FORCED);
+    }
+
+    public static void hideSoftInput(Context context, EditText editText) {
+        editText.clearFocus();
+        InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(editText.getWindowToken(), InputMethodManager.RESULT_UNCHANGED_SHOWN);
+    }
 }

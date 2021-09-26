@@ -9,4 +9,5 @@
     <dimen name="tip">10dp</dimen>
     <!--按钮圆角-->
     <dimen name="base_button_corner_radius">8dp</dimen>
+    <dimen name="base_line_height">1px</dimen>
 </resources>

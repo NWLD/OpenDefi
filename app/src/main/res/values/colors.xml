@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="base_colorPrimary">#000000</color>
+    <color name="base_colorPrimaryDark">#000000</color>
+    <color name="base_colorAccent">#000000</color>
+
     <color name="base_price_down">#1ABB9C</color>
     <color name="base_price_up">#FF5261</color>
     <color name="base_price_normal">#222222</color>
@@ -17,4 +21,5 @@
     <color name="base_color_warning">#FFA800</color>
     <color name="base_color_warning_press">#80FFA800</color>
     <color name="des">#999999</color>
+    <color name="title">#222222</color>
 </resources>

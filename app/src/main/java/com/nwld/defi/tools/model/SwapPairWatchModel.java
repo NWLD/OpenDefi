@@ -48,7 +48,7 @@ public class SwapPairWatchModel {
         }, 3000);
     }
 
-    private void balanceOf(SwapPair swapPair) {
+    public void balanceOf(SwapPair swapPair) {
         BaseExecutor.getInstance().execute(new BaseTask() {
             @Override
             public void run() {
@@ -86,7 +86,7 @@ public class SwapPairWatchModel {
         });
     }
 
-    void repeatBalanceOf(SwapPair swapPair) {
+    private void repeatBalanceOf(SwapPair swapPair) {
         MainHandler.getHandler().postDelayed(new Runnable() {
             @Override
             public void run() {

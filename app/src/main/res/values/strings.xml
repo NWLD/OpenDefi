@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">DefiTool</string>
+    <string name="app_name">OpenDefi</string>
     <string name="address_copied">Address Copied</string>
     <string name="approve">Approve</string>
     <string name="swap">Swap</string>
@@ -8,4 +8,13 @@
     <string name="remove_from_watch">Remove from watch</string>
     <string name="refresh_transaction">Refresh Transaction</string>
     <string name="refresh_transaction_dex">The App is Refreshing Dex Transaction for you</string>
+    <string name="cancel_button">Cancel</string>
+    <string name="confirm_button">Confirm</string>
+    <string name="dialog_loading">Loading</string>
+    <string name="login">Login</string>
+    <string name="input_private">Input private key</string>
+    <string name="import_private">Import</string>
+    <string name="create">Create</string>
+    <string name="import_error">Private key format error.</string>
+    <string name="create_error">Create private key failed. Please try again.</string>
 </resources>

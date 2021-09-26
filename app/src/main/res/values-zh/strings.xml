@@ -1,5 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">DefiTool</string>
+    <string name="app_name">OpenDefi</string>
     <string name="address_copied">地址已复制</string>
+    <string name="approve">授权</string>
+    <string name="swap">兑换</string>
+    <string name="add_to_watch">添加监控</string>
+    <string name="remove_from_watch">取消监控</string>
+    <string name="refresh_transaction">刷新交易信息</string>
+    <string name="refresh_transaction_dex">App 正在为你更新 Dex 交易信息</string>
+    <string name="cancel_button">取消</string>
+    <string name="confirm_button">确认</string>
+    <string name="dialog_loading">Loading</string>
+    <string name="login">登录</string>
+    <string name="input_private">填写私钥</string>
+    <string name="import_private">导入</string>
+    <string name="create">创建</string>
+    <string name="import_error">私钥格式错误。</string>
+    <string name="create_error">创建私钥失败。请重试。</string>
 </resources>

@@ -20,4 +20,66 @@
         <item name="android:windowExitAnimation">@anim/router_null_0</item>
         <item name="android:windowEnterAnimation">@anim/router_null_0</item>
     </style>
+
+    //弹框样式
+
+    <style name="base_dialog" parent="@style/Theme.AppCompat.Light.DialogWhenLarge">
+        <!-- 背景颜色及透明程度 -->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <!-- 是否半透明 -->
+        <item name="android:windowIsTranslucent">true</item>
+        <!-- 是否没有标题 -->
+        <item name="android:windowNoTitle">true</item>
+        <!-- 是否浮现在activity之上 -->
+        <item name="android:windowIsFloating">true</item>
+        <!-- 是否背景模糊 -->
+        <item name="android:backgroundDimEnabled">true</item>
+        <!-- 设置背景模糊的透明度-->
+        <item name="android:backgroundDimAmount">0.5</item>
+        <item name="colorPrimary">@color/base_colorPrimary</item>
+        <item name="colorPrimaryDark">@color/base_colorPrimaryDark</item>
+        <item name="colorAccent">@color/base_colorAccent</item>
+    </style>
+
+    <style name="base_dialog_bottom_animation" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/base_dialog_slide_bottom_in</item>
+        <item name="android:windowExitAnimation">@anim/base_dialog_slide_bottom_out</item>
+    </style>
+
+    <style name="base_dialog_bottom_animation_showing" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/base_dialog_none</item>
+        <item name="android:windowExitAnimation">@anim/base_dialog_slide_bottom_out</item>
+    </style>
+
+    <style name="base_dialog_center_animation" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/base_dialog_center_in</item>
+        <item name="android:windowExitAnimation">@anim/base_dialog_center_out</item>
+    </style>
+
+    <style name="base_dialog_center_animation_showing" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/base_dialog_none</item>
+        <item name="android:windowExitAnimation">@anim/base_dialog_center_out</item>
+    </style>
+
+    <style name="base_input_dialog" parent="base_dialog">
+        <item name="android:windowSoftInputMode">stateAlwaysVisible</item><!--显示软件盘-->
+    </style>
+
+    <style name="base_dialog_translucent" parent="@style/Theme.AppCompat.Light.DialogWhenLarge">
+        <!-- 背景颜色及透明程度 -->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <!-- 是否半透明 -->
+        <item name="android:windowIsTranslucent">true</item>
+        <!-- 是否没有标题 -->
+        <item name="android:windowNoTitle">true</item>
+        <!-- 是否浮现在activity之上 -->
+        <item name="android:windowIsFloating">true</item>
+        <!-- 是否背景模糊 -->
+        <item name="android:backgroundDimEnabled">false</item>
+        <!-- 设置背景模糊的透明度-->
+        <item name="android:backgroundDimAmount">0</item>
+        <item name="colorPrimary">@color/base_colorPrimary</item>
+        <item name="colorPrimaryDark">@color/base_colorPrimaryDark</item>
+        <item name="colorAccent">@color/base_colorAccent</item>
+    </style>
 </resources>

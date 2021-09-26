@@ -8,4 +8,6 @@ public interface IntentConstant {
     String lastLength = "lastLength";
     String newSwapPair = "newSwapPair";
     String NOTIFY_DATA = "NOTIFY_DATA";
+    String PWD = "PWD";
+    String PRI = "PRI";
 }

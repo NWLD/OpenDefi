@@ -14,6 +14,7 @@ import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.util.Random;
 
 import javax.crypto.Cipher;
@@ -421,12 +422,12 @@ public class SecurityUtil {
     }
 
     public static String getRandomPwd() {
-        String a = "ADGJMPSVY";
-        String b = "13579";
-        String c = "fkv";
-        String d = "257";
+        String a = "!E$#@Imkvn095";
+        String b = "FH550!$(@%fgj";
+        String c = "{}}_(*Becv;s";
+        String d = "?MX#!%*(%$)_";
         StringBuilder s = new StringBuilder();
-        Random random = new Random();
+        SecureRandom random = new SecureRandom();
         int r = random.nextInt(10000);
         s.append(a.charAt(r % a.length()));
         r = random.nextInt(500);
