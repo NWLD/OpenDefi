@@ -174,4 +174,11 @@ public abstract class BaseDialog extends Dialog {
         KeyBoardUtils.hideInputForce(this);
         super.dismiss();
     }
+
+    public void hideThisDialog() {
+        if (baseActivity.isDestroyed()) {
+            return;
+        }
+        dismiss();
+    }
 }

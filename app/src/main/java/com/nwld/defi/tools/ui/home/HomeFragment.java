@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.nwld.defi.tools.R;
+import com.nwld.defi.tools.entity.ERC20;
 import com.nwld.defi.tools.entity.SwapPair;
 import com.nwld.defi.tools.manager.ERC20Manager;
 import com.nwld.defi.tools.manager.SwapPairWatchManager;
@@ -40,32 +41,32 @@ public class HomeFragment extends Fragment {
 
     SwapPairAdapter adapter;
     RecyclerView recyclerView;
-    Observer<Integer> listObserver;
-    Observer<Integer> mapObserver;
-    Observer<Integer> balanceObserver;
+    Observer<SwapPair> listObserver;
+    Observer<ERC20> mapObserver;
+    Observer<SwapPair> balanceObserver;
 
     public void initView(View root) {
         recyclerView = root.findViewById(R.id.home_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         adapter = new SwapPairAdapter(getActivity(), swapPairList);
         recyclerView.setAdapter(adapter);
-        listObserver = new Observer<Integer>() {
+        listObserver = new Observer<SwapPair>() {
             @Override
-            public void onChanged(Integer data) {
+            public void onChanged(SwapPair data) {
                 adapter.reset(SwapPairWatchManager.getInstance().getSwapPairList());
             }
         };
         SwapPairWatchManager.getInstance().watchSwapPairData(getViewLifecycleOwner(), listObserver);
-        mapObserver = new Observer<Integer>() {
+        mapObserver = new Observer<ERC20>() {
             @Override
-            public void onChanged(Integer data) {
+            public void onChanged(ERC20 data) {
                 adapter.resetMap(ERC20Manager.getInstance().getErc20Map());
             }
         };
         ERC20Manager.getInstance().watchERC20Map(getViewLifecycleOwner(), mapObserver);
-        balanceObserver = new Observer<Integer>() {
+        balanceObserver = new Observer<SwapPair>() {
             @Override
-            public void onChanged(Integer data) {
+            public void onChanged(SwapPair data) {
                 adapter.notifyDataSetChanged();
             }
         };

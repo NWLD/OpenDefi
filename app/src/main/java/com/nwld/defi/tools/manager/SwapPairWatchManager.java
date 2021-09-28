@@ -28,8 +28,8 @@ import java.util.Map;
  */
 public class SwapPairWatchManager {
     private final Map<String, SwapPairWatchModel> swapPairModelMap = new HashMap<>();
-    private final MutableLiveData<Integer> swapPairData = new MutableLiveData<>();
-    private final MutableLiveData<Integer> balanceData = new MutableLiveData<>();
+    private final MutableLiveData<SwapPair> swapPairData = new MutableLiveData<>();
+    private final MutableLiveData<SwapPair> balanceData = new MutableLiveData<>();
     private final List<SwapPair> swapPairList = new ArrayList<>();
     private final Map<String, SwapPair> swapPairMap = new HashMap<>();
 
@@ -96,14 +96,14 @@ public class SwapPairWatchManager {
         return swap.chain.symbol.toLowerCase() + "#" + swap.name.toLowerCase() + "#" + swap.tokenSymbol.toLowerCase();
     }
 
-    public void watchSwapPairData(LifecycleOwner lifecycleOwner, Observer<Integer> observer) {
+    public void watchSwapPairData(LifecycleOwner lifecycleOwner, Observer<SwapPair> observer) {
         if (null == lifecycleOwner || null == observer) {
             return;
         }
         swapPairData.observe(lifecycleOwner, observer);
     }
 
-    public void unWatchSwapPairData(Observer<Integer> observer) {
+    public void unWatchSwapPairData(Observer<SwapPair> observer) {
         if (null == observer) {
             return;
         }
@@ -116,7 +116,7 @@ public class SwapPairWatchManager {
             synchronized (swapPairList) {
                 swapPairList.add(0, swapPair);
             }
-            swapPairData.postValue(1);
+            swapPairData.postValue(swapPair);
         }
         synchronized (swapPairMap) {
             if (null == swapPairMap.get(swapPair.key())) {
@@ -140,7 +140,7 @@ public class SwapPairWatchManager {
             success = swapPairList.remove(swapPair);
         }
         if (success) {
-            swapPairData.postValue(1);
+            swapPairData.postValue(swapPair);
         }
         //不检测了，其实详情页只是从列表删了
         if (unWatch) {
@@ -158,21 +158,21 @@ public class SwapPairWatchManager {
         return list;
     }
 
-    public void watchBalanceData(LifecycleOwner lifecycleOwner, Observer<Integer> observer) {
+    public void watchBalanceData(LifecycleOwner lifecycleOwner, Observer<SwapPair> observer) {
         if (null == lifecycleOwner || null == observer) {
             return;
         }
         balanceData.observe(lifecycleOwner, observer);
     }
 
-    public void unWatchBalanceData(Observer<Integer> observer) {
+    public void unWatchBalanceData(Observer<SwapPair> observer) {
         if (null == observer) {
             return;
         }
         balanceData.removeObserver(observer);
     }
 
-    public void postBalance() {
-        balanceData.postValue(1);
+    public void postBalance(SwapPair swapPair) {
+        balanceData.postValue(swapPair);
     }
 }

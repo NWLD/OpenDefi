@@ -13,7 +13,7 @@ import java.util.Map;
 
 public class ERC20Manager {
     private final Map<String, ERC20Model> erc20ModelMap = new HashMap<>();
-    private final MutableLiveData<Integer> erc20Data = new MutableLiveData<>();
+    private final MutableLiveData<ERC20> erc20Data = new MutableLiveData<>();
     private final Map<String, ERC20> erc20Map = new HashMap<>();
 
     private static class ManagerHolder {
@@ -37,14 +37,14 @@ public class ERC20Manager {
         return erc20Model;
     }
 
-    public void watchERC20Map(LifecycleOwner lifecycleOwner, Observer<Integer> observer) {
+    public void watchERC20Map(LifecycleOwner lifecycleOwner, Observer<ERC20> observer) {
         if (null == lifecycleOwner || null == observer) {
             return;
         }
         erc20Data.observe(lifecycleOwner, observer);
     }
 
-    public void unWatchERC20Map(Observer<Integer> observer) {
+    public void unWatchERC20Map(Observer<ERC20> observer) {
         if (null == observer) {
             return;
         }
@@ -72,7 +72,7 @@ public class ERC20Manager {
         synchronized (erc20Map) {
             erc20Map.put(addressKey4Chain(erc20.address, erc20.chain.symbol), erc20);
         }
-        erc20Data.postValue(1);
+        erc20Data.postValue(erc20);
     }
 
     public static String addressKey4Chain(String address, String chain) {

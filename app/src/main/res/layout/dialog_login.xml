@@ -6,7 +6,6 @@
     android:fitsSystemWindows="true"
     android:orientation="vertical">
 
-    <!--验证密码-->
     <View
         android:id="@+id/dialog_login_dismiss"
         android:layout_width="match_parent"

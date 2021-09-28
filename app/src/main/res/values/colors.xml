@@ -17,9 +17,9 @@
     <color name="base_button_title">#FFFFFFFF</color>
     <color name="base_color_button_disable">#BCC3CC</color>
     <color name="base_color_button_bg">#2D64F6</color>
-    <color name="base_color_button_press">#802D64F6</color>
-    <color name="base_color_warning">#FFA800</color>
-    <color name="base_color_warning_press">#80FFA800</color>
+    <color name="base_color_button_press">#C02D64F6</color>
+    <color name="base_color_warning">#FF5261</color>
+    <color name="base_color_warning_press">#C0FF5261</color>
     <color name="des">#999999</color>
     <color name="title">#222222</color>
 </resources>

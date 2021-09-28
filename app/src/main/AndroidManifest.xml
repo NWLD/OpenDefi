@@ -30,7 +30,7 @@
             android:theme="@style/Theme.Transparent"></activity>
 
         <activity
-            android:name=".ui.SwapPairDetailActivity"
+            android:name=".ui.swap.SwapPairDetailActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"></activity>
 

@@ -248,6 +248,15 @@
 
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/wallet_address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:singleLine="true"
+        android:padding="10dp"
+        android:textColor="@color/base_button_title"
+        android:textSize="@dimen/des" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -268,7 +277,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:singleLine="true"
-                android:textColor="@color/base_blue"
+                android:textColor="@color/title"
                 android:textSize="@dimen/text" />
 
             <EditText
@@ -301,7 +310,8 @@
                 android:layout_marginTop="6dp"
                 android:background="@drawable/base_bottom_line"
                 android:singleLine="true"
-                android:textColor="@color/des"
+                android:textColor="@color/title"
+                android:paddingBottom="3dp"
                 android:textSize="@dimen/text" />
 
             <TextView
@@ -318,8 +328,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
-                android:orientation="horizontal"
-                android:paddingRight="10dp">
+                android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/item_token0_approve"
@@ -329,6 +338,7 @@
                     android:background="@drawable/base_button"
                     android:gravity="center"
                     android:text="@string/approve"
+                    android:layout_marginRight="10dp"
                     android:textColor="@color/base_button_title"
                     android:textSize="@dimen/text" />
 
@@ -336,7 +346,6 @@
                     android:id="@+id/item_token0_swap"
                     android:layout_width="0dp"
                     android:layout_height="32dp"
-                    android:layout_marginLeft="10dp"
                     android:layout_weight="1"
                     android:background="@drawable/base_button"
                     android:gravity="center"
@@ -362,7 +371,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:singleLine="true"
-                android:textColor="@color/des"
+                android:textColor="@color/title"
                 android:textSize="@dimen/text" />
 
             <EditText
@@ -395,7 +404,8 @@
                 android:layout_marginTop="6dp"
                 android:background="@drawable/base_bottom_line"
                 android:singleLine="true"
-                android:textColor="@color/des"
+                android:paddingBottom="3dp"
+                android:textColor="@color/title"
                 android:textSize="@dimen/text" />
 
             <TextView
@@ -412,8 +422,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
-                android:orientation="horizontal"
-                android:paddingLeft="10dp">
+                android:orientation="horizontal">
 
 
                 <TextView
@@ -425,13 +434,13 @@
                     android:gravity="center"
                     android:text="@string/approve"
                     android:textColor="@color/base_button_title"
+                    android:layout_marginRight="10dp"
                     android:textSize="@dimen/text" />
 
                 <TextView
                     android:id="@+id/item_token1_swap"
                     android:layout_width="0dp"
                     android:layout_height="32dp"
-                    android:layout_marginLeft="10dp"
                     android:layout_weight="1"
                     android:background="@drawable/base_button"
                     android:gravity="center"

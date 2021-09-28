@@ -88,42 +88,42 @@ public class Scenario{
         return  null;
     }
 
-    TransactionReceipt waitForTransactionReceipt(String transactionHash) throws Exception {
+//    TransactionReceipt waitForTransactionReceipt(String transactionHash) throws Exception {
+//
+//        Optional<TransactionReceipt> transactionReceiptOptional =
+//                getTransactionReceipt(transactionHash, SLEEP_DURATION, ATTEMPTS);
+//
+//        if (!transactionReceiptOptional.isPresent()) {
+//
+//        }
+//
+//        return transactionReceiptOptional.get();
+//    }
 
-        java8.util.Optional<TransactionReceipt> transactionReceiptOptional =
-                getTransactionReceipt(transactionHash, SLEEP_DURATION, ATTEMPTS);
+//    private Optional<TransactionReceipt> getTransactionReceipt(
+//            String transactionHash, int sleepDuration, int attempts) throws Exception {
+//
+//        Optional<TransactionReceipt> receiptOptional =
+//                sendTransactionReceiptRequest(transactionHash);
+//        for (int i = 0; i < attempts; i++) {
+//            if (!receiptOptional.isPresent()) {
+//                Thread.sleep(sleepDuration);
+//                receiptOptional = sendTransactionReceiptRequest(transactionHash);
+//            } else {
+//                break;
+//            }
+//        }
+//
+//        return receiptOptional;
+//    }
 
-        if (!transactionReceiptOptional.isPresent()) {
-
-        }
-
-        return transactionReceiptOptional.get();
-    }
-
-    private java8.util.Optional<TransactionReceipt> getTransactionReceipt(
-            String transactionHash, int sleepDuration, int attempts) throws Exception {
-
-        java8.util.Optional<TransactionReceipt> receiptOptional =
-                sendTransactionReceiptRequest(transactionHash);
-        for (int i = 0; i < attempts; i++) {
-            if (!receiptOptional.isPresent()) {
-                Thread.sleep(sleepDuration);
-                receiptOptional = sendTransactionReceiptRequest(transactionHash);
-            } else {
-                break;
-            }
-        }
-
-        return receiptOptional;
-    }
-
-    private java8.util.Optional<TransactionReceipt> sendTransactionReceiptRequest(String transactionHash)
-            throws Exception {
-        EthGetTransactionReceipt transactionReceipt =
-                web3j.ethGetTransactionReceipt(transactionHash).sendAsync().get();
-
-        return transactionReceipt.getTransactionReceipt();
-    }
+//    private Optional<TransactionReceipt> sendTransactionReceiptRequest(String transactionHash)
+//            throws Exception {
+//        EthGetTransactionReceipt transactionReceipt =
+//                web3j.ethGetTransactionReceipt(transactionHash).sendAsync().get();
+//
+//        return transactionReceipt.getTransactionReceipt();
+//    }
 
     BigInteger getNonce(String address) throws Exception {
         EthGetTransactionCount ethGetTransactionCount =

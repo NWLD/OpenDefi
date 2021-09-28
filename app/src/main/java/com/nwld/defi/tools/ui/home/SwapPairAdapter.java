@@ -15,14 +15,11 @@ import com.nwld.defi.tools.constant.IntentConstant;
 import com.nwld.defi.tools.entity.ERC20;
 import com.nwld.defi.tools.entity.SwapPair;
 import com.nwld.defi.tools.manager.ERC20Manager;
-import com.nwld.defi.tools.model.SwapRouterModel;
 import com.nwld.defi.tools.ui.OneClickListener;
-import com.nwld.defi.tools.ui.SwapPairDetailActivity;
+import com.nwld.defi.tools.ui.swap.SwapPairDetailActivity;
 import com.nwld.defi.tools.util.CalcUtils;
-import com.nwld.defi.tools.util.DateUtil;
 import com.nwld.defi.tools.util.DisplayUtil;
 import com.nwld.defi.tools.util.StringUtil;
-import com.nwld.defi.tools.util.ToastUtil;
 
 import java.math.BigInteger;
 import java.math.RoundingMode;

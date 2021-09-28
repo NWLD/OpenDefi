@@ -17,4 +17,11 @@
     <string name="create">创建</string>
     <string name="import_error">私钥格式错误。</string>
     <string name="create_error">创建私钥失败。请重试。</string>
+    <string name="more_title">更多操作</string>
+    <string name="exit_login">退出登录</string>
+    <string name="transaction_detail">交易详情</string>
+    <string name="receipt_address">接收地址</string>
+    <string name="fee">手续费</string>
+    <string name="confirm_pay">确认支付</string>
+    <string name="confirm_approval">确认授权</string>
 </resources>

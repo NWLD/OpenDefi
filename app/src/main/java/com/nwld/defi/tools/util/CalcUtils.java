@@ -67,13 +67,29 @@ public class CalcUtils {
         }
     }
 
+    public static BigInteger pow(String a, int decimals) {
+        try {
+            BigDecimal bgA = new BigDecimal(a);
+            BigDecimal ten = new BigDecimal("10");
+            ten = ten.pow(decimals);
+            return bgA.multiply(ten).toBigInteger();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return BigInteger.ZERO;
+        }
+    }
+
     public static String decimals(BigInteger a, int decimals) {
+        return decimals(a, decimals, 4);
+    }
+
+    public static String decimals(BigInteger a, int decimals, int newScale) {
         try {
             BigDecimal bgA = new BigDecimal(a);
             BigDecimal ten = new BigDecimal("10");
             ten = ten.pow(decimals);
             bgA = bgA.divide(ten);
-            bgA = bgA.setScale(4, BigDecimal.ROUND_DOWN);
+            bgA = bgA.setScale(newScale, BigDecimal.ROUND_DOWN);
             return bgA.toPlainString();
         } catch (Exception e) {
             e.printStackTrace();

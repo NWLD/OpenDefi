@@ -32,7 +32,7 @@
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:text="@string/dialog_loading"
-            android:textColor="@color/base_button_title"
+            android:textColor="@color/title"
             android:textSize="@dimen/des" />
 
     </LinearLayout>

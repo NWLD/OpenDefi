@@ -54,10 +54,10 @@ public class SwapRouterRepository {
         return outs.get(outs.size() - 1).getValue();
     }
 
-    public Function swapExactTokensForTokensSupportingFeeOnTransferTokensFun(
+    public static Function swapExactTokensForTokensSupportingFeeOnTransferTokensFun(
             BigInteger in, BigInteger out, List<String> path, String to
     ) {
-        long deadLine = System.currentTimeMillis() / 1000 + 60;
+        long deadLine = System.currentTimeMillis() / 1000 + 60 * 20;
         List<Address> addressList = new ArrayList<>();
         for (int index = 0; index < path.size(); index++) {
             addressList.add(new Address(path.get(index)));

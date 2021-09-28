@@ -78,7 +78,7 @@ public class ERC20Repository {
         return ((Uint256) response.get(0)).getValue();
     }
 
-    public Function approveFun(String spender, BigInteger amount) throws Exception {
+    public static Function approveFun(String spender, BigInteger amount){
         return new Function(
                 "approve",
                 Arrays.asList(new Address(spender), new Uint256(amount)),

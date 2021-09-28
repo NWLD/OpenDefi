@@ -63,6 +63,10 @@ public class SwapPairFindModel {
                     //这里只拉取新增的交易对
                     if (0 == index) {
                         return;
+//                        index = len - 10;
+//                        if (0 > index) {
+//                            index = 0;
+//                        }
                     }
                     for (; index < len; index++) {
                         SwapPair swapPair = new SwapPair();

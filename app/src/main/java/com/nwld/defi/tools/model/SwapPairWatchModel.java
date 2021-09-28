@@ -75,7 +75,7 @@ public class SwapPairWatchModel {
                             || null == token1BalanceLast
                             || !token0BalanceLast.equals(swapPair.token0Balance)
                             || !token1BalanceLast.equals(swapPair.token1Balance)) {
-                        SwapPairWatchManager.getInstance().postBalance();
+                        SwapPairWatchManager.getInstance().postBalance(swapPair);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();

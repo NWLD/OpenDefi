@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.nwld.defi.tools.util.KeyBoardUtils;
 import com.nwld.defi.tools.util.LogUtil;
+import com.nwld.defi.tools.widget.LoadingDialog;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -116,6 +117,22 @@ public abstract class BaseActivity extends AppCompatActivity {
             }
         }
         return false;
+    }
+
+    private LoadingDialog loadingDialog;
+
+    public void showLoading() {
+        if (null == loadingDialog) {
+            loadingDialog = new LoadingDialog(this);
+        }
+        loadingDialog.show();
+    }
+
+    public void hideLoading() {
+        if (null != loadingDialog) {
+            loadingDialog.dismiss();
+            loadingDialog = null;
+        }
     }
 
     /*** 传入要过滤的View* 过滤之后点击将不会有隐藏软键盘的操作**@returnid 数组*/

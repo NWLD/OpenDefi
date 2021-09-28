@@ -8,6 +8,7 @@ import android.view.MotionEvent;
 import com.nwld.defi.tools.MyApp;
 import com.nwld.defi.tools.constant.IntentConstant;
 import com.nwld.defi.tools.service.RunningService;
+import com.nwld.defi.tools.ui.swap.SwapPairDetailActivity;
 import com.nwld.defi.tools.util.StringUtil;
 
 public class SchemeActivity extends BaseActivity {

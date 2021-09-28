@@ -5,10 +5,16 @@ import com.nwld.defi.tools.async.BaseTask;
 import com.nwld.defi.tools.async.MainHandler;
 import com.nwld.defi.tools.entity.Chain;
 import com.nwld.defi.tools.entity.ERC20;
+import com.nwld.defi.tools.entity.MyTransaction;
 import com.nwld.defi.tools.manager.ERC20Manager;
 import com.nwld.defi.tools.repository.ERC20Repository;
+import com.nwld.defi.tools.repository.SwapRouterRepository;
 
+import org.web3j.abi.datatypes.Function;
+
+import java.math.BigInteger;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ERC20Model {
@@ -40,10 +46,12 @@ public class ERC20Model {
         if (null != map.get(address.toLowerCase())) {
             return;
         }
-        if (null != loadingMap.get(address.toLowerCase())) {
-            return;
+        synchronized (loadingMap) {
+            if (null != loadingMap.get(address.toLowerCase())) {
+                return;
+            }
+            loadingMap.put(address.toLowerCase(), true);
         }
-        loadingMap.put(address.toLowerCase(), true);
         BaseExecutor.getInstance().execute(new BaseTask() {
             @Override
             public void run() {
@@ -57,7 +65,9 @@ public class ERC20Model {
                     postDataMap(erc20);
                 } catch (Exception e) {
                     e.printStackTrace();
-                    loadingMap.remove(address.toLowerCase());
+                    synchronized (loadingMap) {
+                        loadingMap.remove(address.toLowerCase());
+                    }
                     repeatGetERC20Info(address);
                 }
             }
@@ -71,5 +81,15 @@ public class ERC20Model {
                 getERC20Info(address);
             }
         }, 3000);
+    }
+
+    public MyTransaction approveTransaction(String spender, BigInteger amount, String from, String erc20Address) {
+        Function function = ERC20Repository.approveFun(spender, amount);
+        MyTransaction myTransaction = new MyTransaction();
+        myTransaction.from = from;
+        myTransaction.contract = erc20Address;
+        myTransaction.function = function;
+        myTransaction.chain = chain;
+        return myTransaction;
     }
 }
