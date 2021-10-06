@@ -135,6 +135,7 @@ public class SwapPairWatchManager {
     }
 
     public void removeSwapPair(SwapPair swapPair, boolean unWatch) {
+        swapPair.inWatchList = false;
         boolean success;
         synchronized (swapPairList) {
             success = swapPairList.remove(swapPair);

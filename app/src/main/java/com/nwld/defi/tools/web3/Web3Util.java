@@ -73,8 +73,12 @@ public class Web3Util {
     //预估手续费
     public Gas ethEstimateGas(MyTransaction myTransaction)
             throws Exception {
-        String encodedFunction = FunctionEncoder.encode(myTransaction.function);
-        myTransaction.encodedFunction = encodedFunction;
+        String encodedFunction = myTransaction.encodedFunction;
+        if (null == encodedFunction) {
+            encodedFunction = FunctionEncoder.encode(myTransaction.function);
+            myTransaction.encodedFunction = encodedFunction;
+        }
+        LogUtil.e("encodedFunction", encodedFunction);
         Web3j web3j = getWeb3j(myTransaction.chain);
         EthEstimateGas ethEstimateGas = web3j.ethEstimateGas(Transaction.createEthCallTransaction(
                 myTransaction.from, myTransaction.contract, encodedFunction)).sendAsync().get();

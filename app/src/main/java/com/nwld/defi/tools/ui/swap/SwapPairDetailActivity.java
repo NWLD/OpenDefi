@@ -238,6 +238,9 @@ public class SwapPairDetailActivity extends BaseActivity {
 
     @Override
     protected void onDestroy() {
+        if (null != swapPair && !swapPair.inWatchList) {
+            swapPair.stopWatch = true;
+        }
         if (null != token0Balance) {
             token0Balance.stopRefresh = true;
         }
@@ -814,5 +817,21 @@ public class SwapPairDetailActivity extends BaseActivity {
     public View[] filterViews() {
         View[] views = {token0OutEdit, token1OutEdit};
         return views;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (null != swapPair) {
+            swapPair.pauseWatch = false;
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        if (null != swapPair) {
+            swapPair.pauseWatch = true;
+        }
+        super.onPause();
     }
 }

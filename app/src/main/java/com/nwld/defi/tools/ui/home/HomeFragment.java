@@ -72,4 +72,20 @@ public class HomeFragment extends Fragment {
         };
         SwapPairWatchManager.getInstance().watchBalanceData(getViewLifecycleOwner(), balanceObserver);
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(null!=adapter){
+            adapter.onResume();
+        }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        if(null!=adapter){
+            adapter.onPause();
+        }
+    }
 }

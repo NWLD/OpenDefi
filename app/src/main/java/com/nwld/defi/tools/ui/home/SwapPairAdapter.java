@@ -216,4 +216,18 @@ public class SwapPairAdapter extends RecyclerView.Adapter {
         return items.size();
     }
 
+    public void onResume() {
+        int size = items.size();
+        for (int index = 0; index < size; index++) {
+            items.get(index).pauseWatch = false;
+        }
+    }
+
+    public void onPause() {
+        int size = items.size();
+        for (int index = 0; index < size; index++) {
+            items.get(index).pauseWatch = true;
+        }
+    }
+
 }

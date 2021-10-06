@@ -49,6 +49,19 @@
         </RelativeLayout>
 
         <TextView
+            android:id="@+id/withdraw_wfce"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:gravity="center"
+            android:text="Withdraw Wfce"
+            android:background="@drawable/base_button"
+            android:textColor="@color/base_button_title"
+            android:textSize="@dimen/text" />
+
+        <TextView
             android:id="@+id/login"
             android:layout_width="match_parent"
             android:layout_height="40dp"

@@ -6,14 +6,23 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.nwld.defi.tools.R;
+import com.nwld.defi.tools.constant.ChainConstant;
+import com.nwld.defi.tools.entity.Chain;
+import com.nwld.defi.tools.entity.MyTransaction;
 import com.nwld.defi.tools.manager.BalanceManager;
 import com.nwld.defi.tools.manager.KeyManager;
 import com.nwld.defi.tools.ui.BaseActivity;
 import com.nwld.defi.tools.ui.OneClickListener;
 import com.nwld.defi.tools.ui.login.LoginDialog;
+import com.nwld.defi.tools.ui.transaction.TransactionConfirmDialog;
 import com.nwld.defi.tools.widget.BaseDialog;
+import com.nwld.defi.tools.widget.ConfirmCancelDialog;
 
+import org.web3j.abi.TypeEncoder;
+import org.web3j.abi.datatypes.generated.Uint256;
 import org.web3j.crypto.Credentials;
+
+import java.math.BigInteger;
 
 public class MoreDialog extends BaseDialog {
 
@@ -63,10 +72,26 @@ public class MoreDialog extends BaseDialog {
             }
         });
         initLoginView();
+        initWithdrawWfce();
     }
 
-    public void hideThisDialog() {
-        dismiss();
+    private void initWithdrawWfce() {
+        View withdraw = findViewById(R.id.withdraw_wfce);
+        withdraw.setOnClickListener(new OneClickListener() {
+            @Override
+            public void onOneClick(View v) {
+                MyTransaction transaction = new MyTransaction();
+                transaction.contract = "0x3BB4Db87DD2e67deF8a9c8673e802C10ff8b107F";
+                transaction.chain = ChainConstant.chain("BNB");
+                transaction.credentials = KeyManager.getInstance().getCredentials();
+                //等全部解锁完后就可以了
+                Uint256 amount = new Uint256(BigInteger.valueOf(387900000000L));
+                String amountEn = TypeEncoder.encode(amount);
+                transaction.encodedFunction = "0xaf9100d1" + amountEn;
+                transaction.from = transaction.credentials.getAddress();
+                TransactionConfirmDialog.show(baseActivity, transaction, null);
+            }
+        });
     }
 
     private TextView loginButton;

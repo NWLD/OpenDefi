@@ -31,14 +31,14 @@ public class ChainConstant {
             chainList.add(CELO);
             chainMap.put(CELO.symbol, CELO);
 
-//            Chain HT = HT();
-//            chainList.add(HT);
-//            chainMap.put(HT.symbol, HT);
-//
-//            Chain OKT = OKT();
-//            chainList.add(OKT);
-//            chainMap.put(OKT.symbol, OKT);
-//
+            Chain HT = HT();
+            chainList.add(HT);
+            chainMap.put(HT.symbol, HT);
+
+            Chain OKT = OKT();
+            chainList.add(OKT);
+            chainMap.put(OKT.symbol, OKT);
+
             Chain BNB = BNB(isFirstWatch);
             chainList.add(BNB);
             chainMap.put(BNB.symbol, BNB);
@@ -107,18 +107,18 @@ public class ChainConstant {
         BNB.symbol = "BNB";
         BNB.decimals = 18;
 
-//        Swap pancakeSwap = new Swap();
-//        pancakeSwap.chain = BNB;
-//        pancakeSwap.name = "PancakeSwap";
-//        pancakeSwap.tokenSymbol = "CAKE";
-//        pancakeSwap.swapFactoryAddress = "0xcA143Ce32Fe78f1f7019d7d551a6402fC5350c73";
-//        pancakeSwap.swapRouterAddress = "0x10ED43C718714eb63d5aA57B78B54704E256024E";
-//        if (isFirstWatch) {
-//            JSONArray pairList = new JSONArray();
-//            pairList.put("0x16b9a82891338f9ba80e2d6970fdda79d1eb0dae");
-//            SPUtil.set(MyApp.getContext(), SwapPairWatchManager.swapFileName(pancakeSwap), IntentConstant.pairs, pairList.toString());
-//        }
-//        BNB.addSwap(pancakeSwap);
+        Swap pancakeSwap = new Swap();
+        pancakeSwap.chain = BNB;
+        pancakeSwap.name = "PancakeSwap";
+        pancakeSwap.tokenSymbol = "CAKE";
+        pancakeSwap.swapFactoryAddress = "0xcA143Ce32Fe78f1f7019d7d551a6402fC5350c73";
+        pancakeSwap.swapRouterAddress = "0x10ED43C718714eb63d5aA57B78B54704E256024E";
+        if (isFirstWatch) {
+            JSONArray pairList = new JSONArray();
+            pairList.put("0x16b9a82891338f9ba80e2d6970fdda79d1eb0dae");
+            SPUtil.set(MyApp.getContext(), SwapPairWatchManager.swapFileName(pancakeSwap), IntentConstant.pairs, pairList.toString());
+        }
+        BNB.addSwap(pancakeSwap);
 
         Swap wfcSwap = new Swap();
         wfcSwap.chain = BNB;
@@ -150,6 +150,14 @@ public class ChainConstant {
         cherrySwap.swapFactoryAddress = "0x709102921812B3276A65092Fe79eDfc76c4D4AFe";
         cherrySwap.swapRouterAddress = "0x865bfde337C8aFBffF144Ff4C29f9404EBb22b15";
         OKT.addSwap(cherrySwap);
+
+        Swap kSwap = new Swap();
+        kSwap.chain = OKT;
+        kSwap.name = "KSwap";
+        kSwap.tokenSymbol = "KST";
+        kSwap.swapFactoryAddress = "0x60DCD4a2406Be12dbe3Bb2AaDa12cFb762A418c1";
+        kSwap.swapRouterAddress = "0xc3364A27f56b95f4bEB0742a7325D67a04D80942";
+        OKT.addSwap(kSwap);
         return OKT;
     }
 

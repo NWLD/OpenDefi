@@ -8,6 +8,7 @@ import com.nwld.defi.tools.entity.SwapPair;
 import com.nwld.defi.tools.manager.SwapPairWatchManager;
 import com.nwld.defi.tools.repository.ERC20Repository;
 import com.nwld.defi.tools.repository.SwapPairRepository;
+import com.nwld.defi.tools.util.LogUtil;
 
 import java.math.BigInteger;
 
@@ -52,6 +53,10 @@ public class SwapPairWatchModel {
         BaseExecutor.getInstance().execute(new BaseTask() {
             @Override
             public void run() {
+                if (swapPair.pauseWatch) {
+                    LogUtil.e(swapPair.address, "pauseWatch");
+                    return;
+                }
                 try {
                     ERC20Repository service = new ERC20Repository(chain, swapPair.token0);
                     BigInteger token0BalanceLast = swapPair.token0Balance;
@@ -87,6 +92,10 @@ public class SwapPairWatchModel {
     }
 
     private void repeatBalanceOf(SwapPair swapPair) {
+        if (swapPair.stopWatch) {
+            LogUtil.e(swapPair.address, "stopWatch");
+            return;
+        }
         MainHandler.getHandler().postDelayed(new Runnable() {
             @Override
             public void run() {
