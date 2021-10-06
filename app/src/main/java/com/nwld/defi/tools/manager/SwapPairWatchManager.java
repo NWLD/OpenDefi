@@ -145,6 +145,7 @@ public class SwapPairWatchManager {
         }
         //不检测了，其实详情页只是从列表删了
         if (unWatch) {
+            swapPair.stopWatch = true;
             synchronized (swapPairMap) {
                 swapPairMap.remove(swapPair.key());
             }

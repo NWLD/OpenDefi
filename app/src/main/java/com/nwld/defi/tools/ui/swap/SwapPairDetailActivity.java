@@ -239,7 +239,7 @@ public class SwapPairDetailActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         if (null != swapPair && !swapPair.inWatchList) {
-            swapPair.stopWatch = true;
+            SwapPairWatchManager.getInstance().removeSwapPair(swapPair, true);
         }
         if (null != token0Balance) {
             token0Balance.stopRefresh = true;
