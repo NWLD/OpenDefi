@@ -53,11 +53,10 @@ public class SwapPairWatchModel {
         BaseExecutor.getInstance().execute(new BaseTask() {
             @Override
             public void run() {
-                if (swapPair.pauseWatch) {
-                    LogUtil.e(swapPair.address, "pauseWatch");
-                    return;
-                }
                 try {
+                    if (swapPair.pauseWatch) {
+                        return;
+                    }
                     ERC20Repository service = new ERC20Repository(chain, swapPair.token0);
                     BigInteger token0BalanceLast = swapPair.token0Balance;
                     swapPair.token0Balance = service.balanceOf(swapPair.address);
@@ -93,7 +92,6 @@ public class SwapPairWatchModel {
 
     private void repeatBalanceOf(SwapPair swapPair) {
         if (swapPair.stopWatch) {
-            LogUtil.e(swapPair.address, "stopWatch");
             return;
         }
         MainHandler.getHandler().postDelayed(new Runnable() {
