@@ -371,7 +371,7 @@ public class SwapPairDetailActivity extends BaseActivity {
                     BigInteger in = CalcUtils.pow(token0OutEdit.getText().toString(), token0.decimals);
                     //默认20%滑点
                     BigInteger out = CalcUtils.pow(token1InText.getText().toString(), token1.decimals)
-                            .multiply(BigInteger.valueOf(80)).divide(BigInteger.valueOf(100));
+                            .multiply(BigInteger.valueOf(50)).divide(BigInteger.valueOf(100));
                     ;
                     List<String> path = new ArrayList<>();
                     path.add(swapPair.token0);
@@ -419,7 +419,7 @@ public class SwapPairDetailActivity extends BaseActivity {
                     BigInteger in = CalcUtils.pow(token1OutEdit.getText().toString(), token1.decimals);
                     //默认20%滑点
                     BigInteger out = CalcUtils.pow(token0InText.getText().toString(), token0.decimals)
-                            .multiply(BigInteger.valueOf(80)).divide(BigInteger.valueOf(100));
+                            .multiply(BigInteger.valueOf(50)).divide(BigInteger.valueOf(100));
                     List<String> path = new ArrayList<>();
                     path.add(swapPair.token1);
                     path.add(swapPair.token0);
