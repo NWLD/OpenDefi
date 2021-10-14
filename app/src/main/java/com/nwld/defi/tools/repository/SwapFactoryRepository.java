@@ -48,4 +48,37 @@ public class SwapFactoryRepository {
                 FunctionReturnDecoder.decode(responseValue, function.getOutputParameters());
         return response.get(0).toString();
     }
+
+    public String searchPair(String token0, String token1) throws Exception {
+        try {
+            String pair = getPair(token0, token1);
+            return pair;
+        } catch (Exception e) {
+            return pairFor(token0, token1);
+        }
+    }
+
+    public String getPair(String token0, String token1) throws Exception {
+        Function function = new Function(
+                "getPair",
+                Arrays.asList(new Address(token0), new Address(token1)),
+                Arrays.asList(new TypeReference<Address>() {
+                }));
+        String responseValue = Web3Util.getInstance().callSmartContractFunction(chain, function, factoryAddress);
+        List<Type> response =
+                FunctionReturnDecoder.decode(responseValue, function.getOutputParameters());
+        return response.get(0).toString();
+    }
+
+    public String pairFor(String token0, String token1) throws Exception {
+        Function function = new Function(
+                "pairFor",
+                Arrays.asList(new Address(token0), new Address(token1)),
+                Arrays.asList(new TypeReference<Address>() {
+                }));
+        String responseValue = Web3Util.getInstance().callSmartContractFunction(chain, function, factoryAddress);
+        List<Type> response =
+                FunctionReturnDecoder.decode(responseValue, function.getOutputParameters());
+        return response.get(0).toString();
+    }
 }

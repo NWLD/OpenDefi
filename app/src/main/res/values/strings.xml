@@ -24,4 +24,8 @@
     <string name="fee">Fee</string>
     <string name="confirm_pay">Confirm pay</string>
     <string name="confirm_approval">Confirm approval</string>
+    <string name="search_pair">Search Pair</string>
+    <string name="sel_swap">Select Swap</string>
+    <string name="token0">token0</string>
+    <string name="token1">token1</string>
 </resources>

@@ -72,11 +72,6 @@ public class LoginDialog extends BaseDialog {
         initLoginView();
     }
 
-    public void hideThisDialog() {
-        hideSoftInput();
-        dismiss();
-    }
-
     EditText privateKeyEdit;
     private View importButton;
     private View createButton;

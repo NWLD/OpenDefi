@@ -14,6 +14,7 @@ import com.nwld.defi.tools.manager.KeyManager;
 import com.nwld.defi.tools.ui.BaseActivity;
 import com.nwld.defi.tools.ui.OneClickListener;
 import com.nwld.defi.tools.ui.login.LoginDialog;
+import com.nwld.defi.tools.ui.swap.SearchPairDialog;
 import com.nwld.defi.tools.ui.transaction.TransactionConfirmDialog;
 import com.nwld.defi.tools.widget.BaseDialog;
 import com.nwld.defi.tools.widget.ConfirmCancelDialog;
@@ -73,6 +74,7 @@ public class MoreDialog extends BaseDialog {
         });
         initLoginView();
         initWithdrawWfce();
+        initSearchPairView();
     }
 
     private void initWithdrawWfce() {
@@ -85,7 +87,7 @@ public class MoreDialog extends BaseDialog {
                 transaction.chain = ChainConstant.chain("BNB");
                 transaction.credentials = KeyManager.getInstance().getCredentials();
                 //等全部解锁完后就可以了
-                Uint256 amount = new Uint256(BigInteger.valueOf(387900000000L));
+                Uint256 amount = new Uint256(BigInteger.valueOf(4600000000L));
                 String amountEn = TypeEncoder.encode(amount);
                 transaction.encodedFunction = "0xaf9100d1" + amountEn;
                 transaction.from = transaction.credentials.getAddress();
@@ -121,6 +123,20 @@ public class MoreDialog extends BaseDialog {
                         e.printStackTrace();
                     }
                 }
+            }
+        });
+    }
+
+    private TextView searchPairButton;
+
+    public void initSearchPairView() {
+        searchPairButton = V(R.id.search_pair);
+        searchPairButton.setOnClickListener(new OneClickListener() {
+            @Override
+            public void onOneClick(View v) {
+                hideThisDialog();
+                SearchPairDialog dialog = new SearchPairDialog(baseActivity);
+                dialog.show();
             }
         });
     }

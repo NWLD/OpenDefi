@@ -52,7 +52,7 @@ public class SwapPairFindModel {
                 try {
                     SwapFactoryRepository swapFactoryRepository = new SwapFactoryRepository(chain, swap.swapFactoryAddress);
                     int len = swapFactoryRepository.allPairsLength().intValue();
-                    LogUtil.e(chain.symbol, len);
+                    LogUtil.e(chain.symbol+"::"+swap.name, len);
                     if (len <= lastLength) {
                         return;
                     }

@@ -143,6 +143,15 @@ public class ChainConstant {
         OKT.rpcUrl = "https://exchainrpc.okex.org";
         OKT.symbol = "OKT";
         OKT.decimals = 18;
+
+        Swap jSwap = new Swap();
+        jSwap.chain = OKT;
+        jSwap.name = "JSwap";
+        jSwap.tokenSymbol = "JF";
+        jSwap.swapFactoryAddress = "0xd654CbF99F2907F06c88399AE123606121247D5C";
+        jSwap.swapRouterAddress = "0x069A306A638ac9d3a68a6BD8BE898774C073DCb3";
+        OKT.addSwap(jSwap);
+
         Swap cherrySwap = new Swap();
         cherrySwap.chain = OKT;
         cherrySwap.name = "CherrySwap";
