@@ -6,6 +6,7 @@ public class Swap {
     public String tokenSymbol;
     public String swapFactoryAddress;
     public String swapRouterAddress;
+    public boolean findAll = false;
 
     @Override
     public String toString() {

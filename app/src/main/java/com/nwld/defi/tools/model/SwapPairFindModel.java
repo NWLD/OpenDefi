@@ -52,7 +52,7 @@ public class SwapPairFindModel {
                 try {
                     SwapFactoryRepository swapFactoryRepository = new SwapFactoryRepository(chain, swap.swapFactoryAddress);
                     int len = swapFactoryRepository.allPairsLength().intValue();
-                    LogUtil.e(chain.symbol+"::"+swap.name, len);
+                    LogUtil.e(chain.symbol + "::" + swap.name, len);
                     if (len <= lastLength) {
                         return;
                     }
@@ -61,12 +61,8 @@ public class SwapPairFindModel {
                     String fileName = SwapPairWatchManager.swapFileName(swap);
                     SPUtil.set(MyApp.getContext(), fileName, IntentConstant.lastLength, lastLength + "");
                     //这里只拉取新增的交易对
-                    if (0 == index) {
+                    if (0 == index && !swap.findAll) {
                         return;
-//                        index = len - 10;
-//                        if (0 > index) {
-//                            index = 0;
-//                        }
                     }
                     for (; index < len; index++) {
                         SwapPair swapPair = new SwapPair();

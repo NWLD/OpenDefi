@@ -60,6 +60,16 @@ public class ChainConstant {
         CELO.rpcUrl = "https://forno.celo.org";
         CELO.symbol = "CELO";
         CELO.decimals = 18;
+
+        Swap sushiSwap = new Swap();
+        sushiSwap.chain = CELO;
+        sushiSwap.name = "sushiSwap";
+        sushiSwap.tokenSymbol = "SUSHI";
+        sushiSwap.swapFactoryAddress = "0xc35DADB65012eC5796536bD9864eD8773aBc74C4";
+        sushiSwap.swapRouterAddress = "0x1421bDe4B10e8dd459b3BCb598810B1337D56842";
+        sushiSwap.findAll = true;
+        CELO.addSwap(sushiSwap);
+
         Swap ubeSwap = new Swap();
         ubeSwap.chain = CELO;
         ubeSwap.name = "Ubeswap";
