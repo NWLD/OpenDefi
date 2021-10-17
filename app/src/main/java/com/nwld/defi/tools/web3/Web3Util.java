@@ -85,7 +85,8 @@ public class Web3Util {
         EthGasPrice ethGasPrice =
                 web3j.ethGasPrice().sendAsync().get();
         Gas gas = new Gas();
-        gas.gasPrice = ethGasPrice.getGasPrice();
+        //某些情况下需要加gasPrice，让交易快速执行
+        gas.gasPrice = ethGasPrice.getGasPrice().multiply(BigInteger.valueOf(myTransaction.quickGas));
         if (ethEstimateGas.hasError()) {
             throw new Exception("code=" + ethEstimateGas.getError().getCode()
                     + ",msg=" + ethEstimateGas.getError().getMessage());

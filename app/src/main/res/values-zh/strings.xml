@@ -24,4 +24,9 @@
     <string name="fee">手续费</string>
     <string name="confirm_pay">确认支付</string>
     <string name="confirm_approval">确认授权</string>
+    <string name="search_pair">搜索交易对</string>
+    <string name="sel_swap">选择 Swap</string>
+    <string name="token0">token0</string>
+    <string name="token1">token1</string>
+    <string name="quick_swap">抢兑</string>
 </resources>

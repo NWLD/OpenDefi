@@ -20,6 +20,7 @@ public class MyTransaction {
     //交易确认页显示
     public String showValue;
     public boolean isApproval;
+    public int quickGas = 1;
 
     public String gasLabel() {
         BigInteger value = gas.gasLimit.multiply(gas.gasPrice);

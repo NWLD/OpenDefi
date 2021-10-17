@@ -178,8 +178,8 @@ public class SwapPairAdapter extends RecyclerView.Adapter {
                     BigInteger balance0 = swapPair.token0Balance;
                     BigInteger balance1 = swapPair.token1Balance;
                     if (null != balance0 && null != balance1) {
-                        String b0 = CalcUtils.decimals(balance0, token0.decimals);
-                        String b1 = CalcUtils.decimals(balance1, token1.decimals);
+                        String b0 = CalcUtils.decimals(balance0, token0.decimals, 8);
+                        String b1 = CalcUtils.decimals(balance1, token1.decimals, 8);
                         String price0 = StringUtil.trimZero(CalcUtils.divide(b1, b0, 8, RoundingMode.DOWN));
                         String price1 = StringUtil.trimZero(CalcUtils.divide(b0, b1, 8, RoundingMode.DOWN));
                         price0Text.setText("1 " + token0.symbol + " = " + price0 + " " + token1.symbol);

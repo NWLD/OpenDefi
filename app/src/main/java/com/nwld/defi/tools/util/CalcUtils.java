@@ -167,9 +167,8 @@ public class CalcUtils {
                     try {
                         result = bgA.divide(bgB);
                     } catch (ArithmeticException e) {// 防止无限循环而报错  采用四舍五入保留3位有效数字
-                        result = bgA.divide(bgB, 3, RoundingMode.HALF_DOWN);
+                        result = bgA.divide(bgB, 8, RoundingMode.HALF_DOWN);
                     }
-
                     break;
                 case TYPE_SUBTRACT:
                     result = bgA.subtract(bgB);
@@ -178,7 +177,6 @@ public class CalcUtils {
             }
             if (mode == null) {
                 if (scale != -1) {
-
                     result = result.setScale(scale);
                 }
             } else {

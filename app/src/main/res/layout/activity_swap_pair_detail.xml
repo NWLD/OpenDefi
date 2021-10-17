@@ -151,7 +151,7 @@
                     android:singleLine="true"
                     android:layout_marginTop="6dp"
                     android:textColor="@color/base_blue"
-                    android:textSize="@dimen/des" />
+                    android:textSize="@dimen/tip" />
 
 
             </LinearLayout>
@@ -225,7 +225,7 @@
                     android:singleLine="true"
                     android:layout_marginTop="6dp"
                     android:textColor="@color/base_blue"
-                    android:textSize="@dimen/des" />
+                    android:textSize="@dimen/tip" />
 
             </LinearLayout>
 
@@ -340,7 +340,7 @@
                     android:text="@string/approve"
                     android:layout_marginRight="10dp"
                     android:textColor="@color/base_button_title"
-                    android:textSize="@dimen/text" />
+                    android:textSize="@dimen/des" />
 
                 <TextView
                     android:id="@+id/item_token0_swap"
@@ -351,7 +351,20 @@
                     android:gravity="center"
                     android:text="@string/swap"
                     android:textColor="@color/base_button_title"
-                    android:textSize="@dimen/text" />
+                    android:textSize="@dimen/des" />
+
+                <TextView
+                    android:id="@+id/item_token0_quick_swap"
+                    android:layout_width="0dp"
+                    android:layout_height="32dp"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="10dp"
+                    android:visibility="gone"
+                    android:background="@drawable/base_warning_button"
+                    android:gravity="center"
+                    android:text="@string/quick_swap"
+                    android:textColor="@color/base_button_title"
+                    android:textSize="@dimen/des" />
 
             </LinearLayout>
 
@@ -435,7 +448,7 @@
                     android:text="@string/approve"
                     android:textColor="@color/base_button_title"
                     android:layout_marginRight="10dp"
-                    android:textSize="@dimen/text" />
+                    android:textSize="@dimen/des" />
 
                 <TextView
                     android:id="@+id/item_token1_swap"
@@ -446,7 +459,20 @@
                     android:gravity="center"
                     android:text="@string/swap"
                     android:textColor="@color/base_button_title"
-                    android:textSize="@dimen/text" />
+                    android:textSize="@dimen/des" />
+
+                <TextView
+                    android:id="@+id/item_token1_quick_swap"
+                    android:layout_width="0dp"
+                    android:layout_height="32dp"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="10dp"
+                    android:visibility="gone"
+                    android:background="@drawable/base_warning_button"
+                    android:gravity="center"
+                    android:text="@string/quick_swap"
+                    android:textColor="@color/base_button_title"
+                    android:textSize="@dimen/des" />
 
             </LinearLayout>
 

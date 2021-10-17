@@ -67,7 +67,7 @@
                     android:singleLine="true"
                     android:layout_marginTop="6dp"
                     android:textColor="@color/base_blue"
-                    android:textSize="@dimen/des" />
+                    android:textSize="@dimen/tip" />
 
             </LinearLayout>
 
@@ -116,7 +116,7 @@
                     android:singleLine="true"
                     android:layout_marginTop="6dp"
                     android:textColor="@color/base_blue"
-                    android:textSize="@dimen/des" />
+                    android:textSize="@dimen/tip" />
 
             </LinearLayout>
 

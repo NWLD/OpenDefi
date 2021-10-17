@@ -68,6 +68,7 @@ public class SwapPairDetailActivity extends BaseActivity {
     TextView balance0DiffText;
     View approve0View;
     View swap0View;
+    View quickSwap0View;
 
     LinearLayout address1layout;
     TextView symbol1Text;
@@ -78,6 +79,7 @@ public class SwapPairDetailActivity extends BaseActivity {
     SwapPair swapPair;
     View approve1View;
     View swap1View;
+    View quickSwap1View;
 
     TextView price0Text;
     TextView price1Text;
@@ -268,6 +270,7 @@ public class SwapPairDetailActivity extends BaseActivity {
         balance0DiffText = itemView.findViewById(R.id.item_token0_balance_diff);
         approve0View = itemView.findViewById(R.id.item_token0_approve);
         swap0View = itemView.findViewById(R.id.item_token0_swap);
+        quickSwap0View = itemView.findViewById(R.id.item_token0_quick_swap);
 
         address1layout = itemView.findViewById(R.id.item_token1_address_layout);
         symbol1Text = itemView.findViewById(R.id.item_token1_symbol);
@@ -277,6 +280,7 @@ public class SwapPairDetailActivity extends BaseActivity {
         balance1DiffText = itemView.findViewById(R.id.item_token1_balance_diff);
         approve1View = itemView.findViewById(R.id.item_token1_approve);
         swap1View = itemView.findViewById(R.id.item_token1_swap);
+        quickSwap1View = itemView.findViewById(R.id.item_token1_quick_swap);
 
         price0Text = itemView.findViewById(R.id.item_token0_price);
         price1Text = itemView.findViewById(R.id.item_token1_price);
@@ -366,25 +370,14 @@ public class SwapPairDetailActivity extends BaseActivity {
         swap0View.setOnClickListener(new OneClickListener() {
             @Override
             public void onOneClick(View v) {
-                Credentials credentials = getCredentialsNullLogin();
-                if (null != credentials) {
-                    BigInteger in = CalcUtils.pow(token0OutEdit.getText().toString(), token0.decimals);
-                    //默认20%滑点
-                    BigInteger out = CalcUtils.pow(token1InText.getText().toString(), token1.decimals)
-                            .multiply(BigInteger.valueOf(80)).divide(BigInteger.valueOf(100));
-                    ;
-                    List<String> path = new ArrayList<>();
-                    path.add(swapPair.token0);
-                    path.add(swapPair.token1);
-                    String address = Keys.toChecksumAddress(credentials.getAddress());
-                    SwapRouterModel model = new SwapRouterModel(swapPair.chain, swapPair.swap);
-                    MyTransaction transaction = model.swapExactTokensForTokensSupportingFeeOnTransferTokensTransaction(
-                            in, out, path, address
-                    );
-                    transaction.showValue = token0OutEdit.getText().toString() + " " + token0.symbol;
-                    transaction.credentials = credentials;
-                    TransactionConfirmDialog.show(SwapPairDetailActivity.this, transaction, null);
-                }
+                swap0(80, 1);
+            }
+        });
+
+        quickSwap0View.setOnClickListener(new OneClickListener() {
+            @Override
+            public void onOneClick(View v) {
+                swap0(40, 3);
             }
         });
 
@@ -414,24 +407,14 @@ public class SwapPairDetailActivity extends BaseActivity {
         swap1View.setOnClickListener(new OneClickListener() {
             @Override
             public void onOneClick(View v) {
-                Credentials credentials = getCredentialsNullLogin();
-                if (null != credentials) {
-                    BigInteger in = CalcUtils.pow(token1OutEdit.getText().toString(), token1.decimals);
-                    //默认20%滑点
-                    BigInteger out = CalcUtils.pow(token0InText.getText().toString(), token0.decimals)
-                            .multiply(BigInteger.valueOf(80)).divide(BigInteger.valueOf(100));
-                    List<String> path = new ArrayList<>();
-                    path.add(swapPair.token1);
-                    path.add(swapPair.token0);
-                    String address = Keys.toChecksumAddress(credentials.getAddress());
-                    SwapRouterModel model = new SwapRouterModel(swapPair.chain, swapPair.swap);
-                    MyTransaction transaction = model.swapExactTokensForTokensSupportingFeeOnTransferTokensTransaction(
-                            in, out, path, address
-                    );
-                    transaction.showValue = token1OutEdit.getText().toString() + " " + token1.symbol;
-                    transaction.credentials = credentials;
-                    TransactionConfirmDialog.show(SwapPairDetailActivity.this, transaction, null);
-                }
+                swap1(80, 1);
+            }
+        });
+
+        quickSwap1View.setOnClickListener(new OneClickListener() {
+            @Override
+            public void onOneClick(View v) {
+                swap1(40, 3);
             }
         });
 
@@ -490,6 +473,50 @@ public class SwapPairDetailActivity extends BaseActivity {
         });
         initToken0OutEdit();
         initToken1OutEdit();
+    }
+
+    private void swap0(int slide, int quickGas) {
+        Credentials credentials = getCredentialsNullLogin();
+        if (null != credentials) {
+            BigInteger in = CalcUtils.pow(token0OutEdit.getText().toString(), token0.decimals);
+            //默认20%滑点
+            BigInteger out = CalcUtils.pow(token1InText.getText().toString(), token1.decimals)
+                    .multiply(BigInteger.valueOf(slide)).divide(BigInteger.valueOf(100));
+            List<String> path = new ArrayList<>();
+            path.add(swapPair.token0);
+            path.add(swapPair.token1);
+            String address = Keys.toChecksumAddress(credentials.getAddress());
+            SwapRouterModel model = new SwapRouterModel(swapPair.chain, swapPair.swap);
+            MyTransaction transaction = model.swapExactTokensForTokensSupportingFeeOnTransferTokensTransaction(
+                    in, out, path, address
+            );
+            transaction.showValue = token0OutEdit.getText().toString() + " " + token0.symbol;
+            transaction.credentials = credentials;
+            transaction.quickGas = quickGas;
+            TransactionConfirmDialog.show(SwapPairDetailActivity.this, transaction, null);
+        }
+    }
+
+    private void swap1(int slide, int quickGas) {
+        Credentials credentials = getCredentialsNullLogin();
+        if (null != credentials) {
+            BigInteger in = CalcUtils.pow(token1OutEdit.getText().toString(), token1.decimals);
+            //默认20%滑点
+            BigInteger out = CalcUtils.pow(token0InText.getText().toString(), token0.decimals)
+                    .multiply(BigInteger.valueOf(slide)).divide(BigInteger.valueOf(100));
+            List<String> path = new ArrayList<>();
+            path.add(swapPair.token1);
+            path.add(swapPair.token0);
+            String address = Keys.toChecksumAddress(credentials.getAddress());
+            SwapRouterModel model = new SwapRouterModel(swapPair.chain, swapPair.swap);
+            MyTransaction transaction = model.swapExactTokensForTokensSupportingFeeOnTransferTokensTransaction(
+                    in, out, path, address
+            );
+            transaction.showValue = token1OutEdit.getText().toString() + " " + token1.symbol;
+            transaction.credentials = credentials;
+            transaction.quickGas = quickGas;
+            TransactionConfirmDialog.show(SwapPairDetailActivity.this, transaction, null);
+        }
     }
 
     private void confirmApproval(String hash) {
@@ -720,8 +747,8 @@ public class SwapPairDetailActivity extends BaseActivity {
             BigInteger balance0 = swapPair.token0Balance;
             BigInteger balance1 = swapPair.token1Balance;
             if (null != balance0 && null != balance1) {
-                String b0 = CalcUtils.decimals(balance0, token0.decimals);
-                String b1 = CalcUtils.decimals(balance1, token1.decimals);
+                String b0 = CalcUtils.decimals(balance0, token0.decimals, 8);
+                String b1 = CalcUtils.decimals(balance1, token1.decimals, 8);
                 String price0 = StringUtil.trimZero(CalcUtils.divide(b1, b0, 8, RoundingMode.DOWN));
                 String price1 = StringUtil.trimZero(CalcUtils.divide(b0, b1, 8, RoundingMode.DOWN));
                 price0Text.setText("1 " + token0.symbol + " = " + price0 + " " + token1.symbol);
@@ -795,9 +822,11 @@ public class SwapPairDetailActivity extends BaseActivity {
                 || 0 > token0Allowance.compareTo(token0Input)) {
             approve0View.setVisibility(View.VISIBLE);
             swap0View.setEnabled(false);
+            quickSwap0View.setVisibility(View.GONE);
         } else {
             approve0View.setVisibility(View.GONE);
             swap0View.setEnabled(true);
+            quickSwap0View.setVisibility(View.VISIBLE);
         }
     }
 
@@ -807,9 +836,11 @@ public class SwapPairDetailActivity extends BaseActivity {
                 || 0 > token1Allowance.compareTo(token1Input)) {
             approve1View.setVisibility(View.VISIBLE);
             swap1View.setEnabled(false);
+            quickSwap1View.setVisibility(View.GONE);
         } else {
             approve1View.setVisibility(View.GONE);
             swap1View.setEnabled(true);
+            quickSwap1View.setVisibility(View.VISIBLE);
         }
     }
 
