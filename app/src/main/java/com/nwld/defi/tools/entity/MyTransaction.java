@@ -20,7 +20,7 @@ public class MyTransaction {
     //交易确认页显示
     public String showValue;
     public boolean isApproval;
-    public int quickGas = 1;
+    public int quickGas = 110;
     //只显示，不发起交易
     public boolean justShow = false;
 

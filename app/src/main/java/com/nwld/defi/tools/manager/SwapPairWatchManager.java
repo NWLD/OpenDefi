@@ -111,17 +111,20 @@ public class SwapPairWatchManager {
     }
 
     public void addSwapPair(SwapPair swapPair, boolean add2WatchList) {
-        if (add2WatchList) {
-            swapPair.inWatchList = true;
-            synchronized (swapPairList) {
-                swapPairList.add(0, swapPair);
-            }
-            swapPairData.postValue(swapPair);
-        }
         synchronized (swapPairMap) {
             if (null == swapPairMap.get(swapPair.key())) {
                 swapPairMap.put(swapPair.key(), swapPair);
                 swapPairWatchModel(swapPair.chain).getPairInfo(swapPair);
+            }
+            if (add2WatchList) {
+                if (swapPairMap.get(swapPair.key()).inWatchList) {
+                    return;
+                }
+                swapPair.inWatchList = true;
+                synchronized (swapPairList) {
+                    swapPairList.add(0, swapPair);
+                }
+                swapPairData.postValue(swapPair);
             }
         }
     }

@@ -18,9 +18,13 @@ import androidx.core.app.NotificationCompat;
 
 import com.nwld.defi.tools.MyApp;
 import com.nwld.defi.tools.R;
+import com.nwld.defi.tools.constant.ChainConstant;
+import com.nwld.defi.tools.entity.Chain;
 import com.nwld.defi.tools.manager.SwapPairFindManager;
 import com.nwld.defi.tools.manager.SwapPairWatchManager;
 import com.nwld.defi.tools.ui.SchemeActivity;
+
+import java.util.List;
 
 public class RunningService extends Service implements MediaPlayer.OnCompletionListener {
     private final String CHANNEL_TRANSACTION = "transaction";
@@ -47,6 +51,12 @@ public class RunningService extends Service implements MediaPlayer.OnCompletionL
             int importance = NotificationManager.IMPORTANCE_HIGH;
             createNotificationChannel(CHANNEL_REFRESH_TRANSACTION, CHANNEL_REFRESH_TRANSACTION, importance);
             createTransactionNotificationChannel(CHANNEL_TRANSACTION, CHANNEL_TRANSACTION, NotificationManager.IMPORTANCE_HIGH);
+            List<Chain> chainList = ChainConstant.chainList();
+            for (int index = 0; index < chainList.size(); index++) {
+                createTransactionNotificationChannel(chainList.get(index).symbol
+                        , chainList.get(index).symbol
+                        , NotificationManager.IMPORTANCE_HIGH);
+            }
         }
 //        PowerManager powerManager = (PowerManager) getSystemService(POWER_SERVICE);
 //        wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,

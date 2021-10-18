@@ -22,7 +22,6 @@ import com.nwld.defi.tools.util.StringUtil;
 
 public class NotifyManager {
     public int notifyId = 2;
-    private final String CHANNEL_TRANSACTION = "transaction";
 
     private static class ManagerHolder {
         private static final NotifyManager manager = new NotifyManager();
@@ -47,7 +46,7 @@ public class NotifyManager {
                         PendingIntent.getActivity(MyApp.getContext(), 0, notificationIntent, 0);
                 String text = StringUtil.trimZero(CalcUtils.decimals(swapPair.token0InitBalance, token0.decimals)) + " " + token0.symbol;
                 text = text + " + " + StringUtil.trimZero(CalcUtils.decimals(swapPair.token1InitBalance, token1.decimals)) + " " + token1.symbol;
-                Notification notification = new NotificationCompat.Builder(MyApp.getContext(), CHANNEL_TRANSACTION)  //注意了这里需要一个channelId
+                Notification notification = new NotificationCompat.Builder(MyApp.getContext(), swapPair.chain.symbol)  //注意了这里需要一个channelId
                         .setContentTitle(swapPair.chain.symbol + " " + swapPair.swap.name + " LP")
                         .setContentText(text)
                         .setSmallIcon(R.mipmap.ic_launcher)

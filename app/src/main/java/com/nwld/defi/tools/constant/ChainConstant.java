@@ -107,6 +107,14 @@ public class ChainConstant {
         ETH.decimals = 18;
         ETH.browser = "https://etherscan.io";
 
+        Swap sushiSwap = new Swap();
+        sushiSwap.chain = ETH;
+        sushiSwap.name = "SushiSwap";
+        sushiSwap.tokenSymbol = "SUSHI";
+        sushiSwap.swapFactoryAddress = "0xC0AEe478e3658e2610c5F7A4A2E1777cE9e4f2Ac";
+        sushiSwap.swapRouterAddress = "0xd9e1cE17f2641f24aE83637ab66a2cca9C378B9F";
+        ETH.addSwap(sushiSwap);
+
         Swap uniSwapV2 = new Swap();
         uniSwapV2.chain = ETH;
         uniSwapV2.name = "uniSwapV2";
@@ -222,7 +230,7 @@ public class ChainConstant {
         FTM.symbol = "FTM";
         FTM.decimals = 18;
         FTM.browser = "https://ftmscan.com";
-        FTM.checkSell = "";
+        FTM.checkSell = "0xc70BBdb696b9fF09Edba52688F1A7b8FA1EFDF2a";
 
         Swap spiritSwap = new Swap();
         spiritSwap.chain = FTM;
@@ -249,7 +257,7 @@ public class ChainConstant {
         MATIC.symbol = "MATIC";
         MATIC.decimals = 18;
         MATIC.browser = "https://polygonscan.com";
-        MATIC.checkSell = "";
+        MATIC.checkSell = "0x216ac876cE5c7C5CBfED7E4Fb28DCAe0832611bd";
 
         Swap quickSwap = new Swap();
         quickSwap.chain = MATIC;
