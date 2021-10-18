@@ -29,4 +29,5 @@
     <string name="token0">token0</string>
     <string name="token1">token1</string>
     <string name="quick_swap">抢兑</string>
+    <string name="check_sell">检测卖出</string>
 </resources>

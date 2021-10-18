@@ -11,17 +11,12 @@ import com.nwld.defi.tools.async.BaseTask;
 import com.nwld.defi.tools.async.MainHandler;
 import com.nwld.defi.tools.entity.Gas;
 import com.nwld.defi.tools.entity.MyTransaction;
-import com.nwld.defi.tools.manager.BalanceManager;
-import com.nwld.defi.tools.manager.KeyManager;
 import com.nwld.defi.tools.ui.BaseActivity;
 import com.nwld.defi.tools.ui.OneClickListener;
-import com.nwld.defi.tools.ui.login.LoginDialog;
 import com.nwld.defi.tools.util.LogUtil;
+import com.nwld.defi.tools.util.ToastUtil;
 import com.nwld.defi.tools.web3.Web3Util;
 import com.nwld.defi.tools.widget.BaseDialog;
-
-import org.w3c.dom.Text;
-import org.web3j.crypto.Credentials;
 
 public class TransactionConfirmDialog extends BaseDialog {
 
@@ -64,6 +59,7 @@ public class TransactionConfirmDialog extends BaseDialog {
                             if (activity.isDestroyed()) {
                                 return;
                             }
+                            ToastUtil.showToast(activity, e.getMessage(), true);
                             activity.hideLoading();
                         }
                     });
@@ -179,6 +175,10 @@ public class TransactionConfirmDialog extends BaseDialog {
                 });
             }
         });
+        //只显示，不发起交易
+        if (transaction.justShow) {
+            confirmButton.setEnabled(false);
+        }
     }
 
 }

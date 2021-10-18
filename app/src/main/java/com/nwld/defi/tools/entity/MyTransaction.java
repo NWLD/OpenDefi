@@ -21,6 +21,8 @@ public class MyTransaction {
     public String showValue;
     public boolean isApproval;
     public int quickGas = 1;
+    //只显示，不发起交易
+    public boolean justShow = false;
 
     public String gasLabel() {
         BigInteger value = gas.gasLimit.multiply(gas.gasPrice);

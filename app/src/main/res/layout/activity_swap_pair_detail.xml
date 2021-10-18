@@ -368,6 +368,18 @@
 
             </LinearLayout>
 
+            <TextView
+                android:id="@+id/item_token0_check_sell"
+                android:layout_width="match_parent"
+                android:layout_height="32dp"
+                android:layout_marginTop="20dp"
+                android:visibility="gone"
+                android:background="@drawable/base_warning_button"
+                android:gravity="center"
+                android:text="@string/check_sell"
+                android:textColor="@color/base_button_title"
+                android:textSize="@dimen/text" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -475,6 +487,18 @@
                     android:textSize="@dimen/des" />
 
             </LinearLayout>
+
+            <TextView
+                android:id="@+id/item_token1_check_sell"
+                android:layout_width="match_parent"
+                android:layout_height="32dp"
+                android:layout_marginTop="20dp"
+                android:visibility="gone"
+                android:background="@drawable/base_warning_button"
+                android:gravity="center"
+                android:text="@string/check_sell"
+                android:textColor="@color/base_button_title"
+                android:textSize="@dimen/text" />
 
         </LinearLayout>
 

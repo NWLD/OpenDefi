@@ -29,4 +29,5 @@
     <string name="token0">token0</string>
     <string name="token1">token1</string>
     <string name="quick_swap">QuickSwap</string>
+    <string name="check_sell">CheckSell</string>
 </resources>

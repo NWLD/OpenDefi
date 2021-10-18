@@ -26,6 +26,7 @@ import com.nwld.defi.tools.manager.ERC20Manager;
 import com.nwld.defi.tools.manager.KeyManager;
 import com.nwld.defi.tools.manager.SwapPairWatchManager;
 import com.nwld.defi.tools.model.AllowanceModel;
+import com.nwld.defi.tools.model.CheckSellModel;
 import com.nwld.defi.tools.model.ERC20Model;
 import com.nwld.defi.tools.model.SwapRouterModel;
 import com.nwld.defi.tools.model.TransactionReceiptModel;
@@ -35,7 +36,6 @@ import com.nwld.defi.tools.ui.login.LoginDialog;
 import com.nwld.defi.tools.ui.transaction.TransactionConfirmDialog;
 import com.nwld.defi.tools.util.CalcUtils;
 import com.nwld.defi.tools.util.DateUtil;
-import com.nwld.defi.tools.util.LogUtil;
 import com.nwld.defi.tools.util.SPUtil;
 import com.nwld.defi.tools.util.StringUtil;
 import com.nwld.defi.tools.util.ToastUtil;
@@ -69,6 +69,7 @@ public class SwapPairDetailActivity extends BaseActivity {
     View approve0View;
     View swap0View;
     View quickSwap0View;
+    View checkSell0View;
 
     LinearLayout address1layout;
     TextView symbol1Text;
@@ -80,6 +81,7 @@ public class SwapPairDetailActivity extends BaseActivity {
     View approve1View;
     View swap1View;
     View quickSwap1View;
+    View checkSell1View;
 
     TextView price0Text;
     TextView price1Text;
@@ -271,6 +273,7 @@ public class SwapPairDetailActivity extends BaseActivity {
         approve0View = itemView.findViewById(R.id.item_token0_approve);
         swap0View = itemView.findViewById(R.id.item_token0_swap);
         quickSwap0View = itemView.findViewById(R.id.item_token0_quick_swap);
+        checkSell0View = itemView.findViewById(R.id.item_token0_check_sell);
 
         address1layout = itemView.findViewById(R.id.item_token1_address_layout);
         symbol1Text = itemView.findViewById(R.id.item_token1_symbol);
@@ -281,6 +284,7 @@ public class SwapPairDetailActivity extends BaseActivity {
         approve1View = itemView.findViewById(R.id.item_token1_approve);
         swap1View = itemView.findViewById(R.id.item_token1_swap);
         quickSwap1View = itemView.findViewById(R.id.item_token1_quick_swap);
+        checkSell1View = itemView.findViewById(R.id.item_token1_check_sell);
 
         price0Text = itemView.findViewById(R.id.item_token0_price);
         price1Text = itemView.findViewById(R.id.item_token1_price);
@@ -381,6 +385,19 @@ public class SwapPairDetailActivity extends BaseActivity {
             }
         });
 
+        checkSell0View.setOnClickListener(new OneClickListener() {
+            @Override
+            public void onOneClick(View v) {
+                if (null == token0 || null == token1) {
+                    return;
+                }
+                List<String> path = new ArrayList<>();
+                path.add(swapPair.token1);
+                path.add(swapPair.token0);
+                checkSell(path, token0.symbol);
+            }
+        });
+
         approve1View.setOnClickListener(new OneClickListener() {
             @Override
             public void onOneClick(View v) {
@@ -415,6 +432,19 @@ public class SwapPairDetailActivity extends BaseActivity {
             @Override
             public void onOneClick(View v) {
                 swap1(40, 3);
+            }
+        });
+
+        checkSell1View.setOnClickListener(new OneClickListener() {
+            @Override
+            public void onOneClick(View v) {
+                if (null == token0 || null == token1) {
+                    return;
+                }
+                List<String> path = new ArrayList<>();
+                path.add(swapPair.token0);
+                path.add(swapPair.token1);
+                checkSell(path, token1.symbol);
             }
         });
 
@@ -473,6 +503,22 @@ public class SwapPairDetailActivity extends BaseActivity {
         });
         initToken0OutEdit();
         initToken1OutEdit();
+    }
+
+    private void checkSell(List<String> path, String symbol) {
+        if (StringUtil.isEmpty(swapPair.token0) || StringUtil.isEmpty(swapPair.token1)) {
+            return;
+        }
+        Credentials credentials = getCredentialsNullLogin();
+        if (null != credentials) {
+            String from = Keys.toChecksumAddress(credentials.getAddress());
+            CheckSellModel model = new CheckSellModel(swapPair.chain, swapPair.swap);
+            MyTransaction transaction = model.checkSellTransaction(from, path);
+            transaction.showValue = getResources().getString(R.string.check_sell) + " " + symbol;
+            transaction.credentials = credentials;
+            transaction.justShow = true;
+            TransactionConfirmDialog.show(SwapPairDetailActivity.this, transaction, null);
+        }
     }
 
     private void swap0(int slide, int quickGas) {
@@ -678,6 +724,13 @@ public class SwapPairDetailActivity extends BaseActivity {
         } else {
             addWatchText.setBackgroundResource(R.drawable.base_button);
             addWatchText.setText(R.string.add_to_watch);
+        }
+        if (StringUtil.isEmpty(swapPair.chain.checkSell)) {
+            checkSell0View.setVisibility(View.GONE);
+            checkSell1View.setVisibility(View.GONE);
+        } else {
+            checkSell0View.setVisibility(View.VISIBLE);
+            checkSell1View.setVisibility(View.VISIBLE);
         }
         //token0 信息
         if (null != swapPair.token0) {

@@ -9,6 +9,8 @@ public class Chain {
     public int chainId;
     public String rpcUrl;
     public final List<Swap> swapList = new ArrayList<>();
+    //检测代币能否卖出的合约地址
+    public String checkSell;
 
     public void addSwap(Swap swap) {
         swapList.add(swap);

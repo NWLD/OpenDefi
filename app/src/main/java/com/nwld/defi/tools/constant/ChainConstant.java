@@ -31,13 +31,13 @@ public class ChainConstant {
             chainList.add(CELO);
             chainMap.put(CELO.symbol, CELO);
 
-//            Chain HT = HT();
-//            chainList.add(HT);
-//            chainMap.put(HT.symbol, HT);
-//
-//            Chain OKT = OKT();
-//            chainList.add(OKT);
-//            chainMap.put(OKT.symbol, OKT);
+            Chain HT = HT();
+            chainList.add(HT);
+            chainMap.put(HT.symbol, HT);
+
+            Chain OKT = OKT();
+            chainList.add(OKT);
+            chainMap.put(OKT.symbol, OKT);
 
             Chain BNB = BNB(isFirstWatch);
             chainList.add(BNB);
@@ -117,6 +117,7 @@ public class ChainConstant {
         BNB.rpcUrl = "https://bsc-dataseed1.binance.org";
         BNB.symbol = "BNB";
         BNB.decimals = 18;
+        BNB.checkSell = "0x07038b34898b56fB6edbaAb9723ED3C30F8cd910";
 
         Swap pancakeSwap = new Swap();
         pancakeSwap.chain = BNB;
@@ -187,6 +188,8 @@ public class ChainConstant {
         HT.rpcUrl = "https://http-mainnet.hecochain.com";
         HT.symbol = "HT";
         HT.decimals = 18;
+        HT.checkSell = "0x5e0985D5D3C0cd358b8A8b31110B442a150d6A85";
+
         Swap mdex = new Swap();
         mdex.chain = HT;
         mdex.name = "Mdex";
