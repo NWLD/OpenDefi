@@ -43,9 +43,17 @@ public class ChainConstant {
             chainList.add(BNB);
             chainMap.put(BNB.symbol, BNB);
 
-//            Chain ETH = ETH(isFirstWatch);
-//            chainList.add(ETH);
-//            chainMap.put(ETH.symbol, ETH);
+            Chain ETH = ETH(isFirstWatch);
+            chainList.add(ETH);
+            chainMap.put(ETH.symbol, ETH);
+
+            Chain FTM = FTM(isFirstWatch);
+            chainList.add(FTM);
+            chainMap.put(FTM.symbol, FTM);
+
+            Chain MATIC = MATIC(isFirstWatch);
+            chainList.add(MATIC);
+            chainMap.put(MATIC.symbol, MATIC);
         }
         return chainList;
     }
@@ -60,6 +68,8 @@ public class ChainConstant {
         CELO.rpcUrl = "https://forno.celo.org";
         CELO.symbol = "CELO";
         CELO.decimals = 18;
+        CELO.browser = "https://explorer.celo.org";
+        CELO.checkSell = "0xc70BBdb696b9fF09Edba52688F1A7b8FA1EFDF2a";
 
         Swap sushiSwap = new Swap();
         sushiSwap.chain = CELO;
@@ -95,6 +105,7 @@ public class ChainConstant {
         ETH.rpcUrl = "https://ethjeqd0430103d.swtc.top";
         ETH.symbol = "ETH";
         ETH.decimals = 18;
+        ETH.browser = "https://etherscan.io";
 
         Swap uniSwapV2 = new Swap();
         uniSwapV2.chain = ETH;
@@ -117,6 +128,7 @@ public class ChainConstant {
         BNB.rpcUrl = "https://bsc-dataseed1.binance.org";
         BNB.symbol = "BNB";
         BNB.decimals = 18;
+        BNB.browser = "https://bscscan.com";
         BNB.checkSell = "0x07038b34898b56fB6edbaAb9723ED3C30F8cd910";
 
         Swap pancakeSwap = new Swap();
@@ -155,6 +167,8 @@ public class ChainConstant {
         OKT.rpcUrl = "https://exchainrpc.okex.org";
         OKT.symbol = "OKT";
         OKT.decimals = 18;
+        OKT.browser = "https://www.oklink.com/okexchain";
+        OKT.checkSell = "0x56a6A8DDcB246C4e6e44A3590C1d5B1E98664d11";
 
         Swap jSwap = new Swap();
         jSwap.chain = OKT;
@@ -188,6 +202,7 @@ public class ChainConstant {
         HT.rpcUrl = "https://http-mainnet.hecochain.com";
         HT.symbol = "HT";
         HT.decimals = 18;
+        HT.browser = "https://hecoinfo.com";
         HT.checkSell = "0x5e0985D5D3C0cd358b8A8b31110B442a150d6A85";
 
         Swap mdex = new Swap();
@@ -198,5 +213,51 @@ public class ChainConstant {
         mdex.swapRouterAddress = "0xED7d5F38C79115ca12fe6C0041abb22F0A06C300";
         HT.addSwap(mdex);
         return HT;
+    }
+
+    private static Chain FTM(boolean isFirstWatch) {
+        Chain FTM = new Chain();
+        FTM.chainId = 250;
+        FTM.rpcUrl = "https://rpc.ftm.tools";
+        FTM.symbol = "FTM";
+        FTM.decimals = 18;
+        FTM.browser = "https://ftmscan.com";
+        FTM.checkSell = "";
+
+        Swap spiritSwap = new Swap();
+        spiritSwap.chain = FTM;
+        spiritSwap.name = "SpiritSwap";
+        spiritSwap.tokenSymbol = "SPIRIT";
+        spiritSwap.swapFactoryAddress = "0xEF45d134b73241eDa7703fa787148D9C9F4950b0";
+        spiritSwap.swapRouterAddress = "0x16327E3FbDaCA3bcF7E38F5Af2599D2DDc33aE52";
+        FTM.addSwap(spiritSwap);
+
+        Swap spookySwap = new Swap();
+        spookySwap.chain = FTM;
+        spookySwap.name = "SpookySwap";
+        spookySwap.tokenSymbol = "BOO";
+        spookySwap.swapFactoryAddress = "0x152eE697f2E276fA89E96742e9bB9aB1F2E61bE3";
+        spookySwap.swapRouterAddress = "0xF491e7B69E4244ad4002BC14e878a34207E38c29";
+        FTM.addSwap(spookySwap);
+        return FTM;
+    }
+
+    private static Chain MATIC(boolean isFirstWatch) {
+        Chain MATIC = new Chain();
+        MATIC.chainId = 137;
+        MATIC.rpcUrl = "https://polygon-rpc.com";
+        MATIC.symbol = "MATIC";
+        MATIC.decimals = 18;
+        MATIC.browser = "https://polygonscan.com";
+        MATIC.checkSell = "";
+
+        Swap quickSwap = new Swap();
+        quickSwap.chain = MATIC;
+        quickSwap.name = "QuickSwap";
+        quickSwap.tokenSymbol = "QUICK";
+        quickSwap.swapFactoryAddress = "0x5757371414417b8C6CAad45bAeF941aBc7d3Ab32";
+        quickSwap.swapRouterAddress = "0xa5E0829CaCEd8fFDD4De3c43696c57F7D7A678ff";
+        MATIC.addSwap(quickSwap);
+        return MATIC;
     }
 }

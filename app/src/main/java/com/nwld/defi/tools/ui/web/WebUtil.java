@@ -40,4 +40,11 @@ public class WebUtil {
         }
     }
 
+    public static void toChainBrowser(Activity activity, String url, String address) {
+        if (StringUtil.isEmpty(url) || StringUtil.isEmpty(address)) {
+            return;
+        }
+        toBrowser(activity, url + "/address/" + address);
+    }
+
 }

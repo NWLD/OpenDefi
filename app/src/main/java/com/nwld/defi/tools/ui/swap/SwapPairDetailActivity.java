@@ -34,11 +34,13 @@ import com.nwld.defi.tools.ui.BaseActivity;
 import com.nwld.defi.tools.ui.OneClickListener;
 import com.nwld.defi.tools.ui.login.LoginDialog;
 import com.nwld.defi.tools.ui.transaction.TransactionConfirmDialog;
+import com.nwld.defi.tools.ui.web.WebUtil;
 import com.nwld.defi.tools.util.CalcUtils;
 import com.nwld.defi.tools.util.DateUtil;
 import com.nwld.defi.tools.util.SPUtil;
 import com.nwld.defi.tools.util.StringUtil;
 import com.nwld.defi.tools.util.ToastUtil;
+import com.nwld.defi.tools.web3.Web3Util;
 import com.nwld.defi.tools.widget.TextChangedAction;
 
 import org.json.JSONArray;
@@ -343,8 +345,9 @@ public class SwapPairDetailActivity extends BaseActivity {
         pairInfoLayout.setOnClickListener(new OneClickListener() {
             @Override
             public void onOneClick(View v) {
-                StringUtil.toClipboard(activity, swapPair.address);
-                ToastUtil.showToast(activity, activity.getString(R.string.address_copied));
+//                StringUtil.toClipboard(activity, swapPair.address);
+//                ToastUtil.showToast(activity, activity.getString(R.string.address_copied));
+                WebUtil.toChainBrowser(SwapPairDetailActivity.this, swapPair.chain.browser, swapPair.address);
             }
         });
 
@@ -452,8 +455,9 @@ public class SwapPairDetailActivity extends BaseActivity {
             @Override
             public void onOneClick(View v) {
                 if (null != swapPair.token0) {
-                    StringUtil.toClipboard(activity, swapPair.token0);
-                    ToastUtil.showToast(activity, activity.getString(R.string.address_copied));
+//                    StringUtil.toClipboard(activity, swapPair.token0);
+//                    ToastUtil.showToast(activity, activity.getString(R.string.address_copied));
+                    WebUtil.toChainBrowser(SwapPairDetailActivity.this, swapPair.chain.browser, swapPair.token0);
                 }
             }
         });
@@ -462,8 +466,9 @@ public class SwapPairDetailActivity extends BaseActivity {
             @Override
             public void onOneClick(View v) {
                 if (null != swapPair.token1) {
-                    StringUtil.toClipboard(activity, swapPair.token1);
-                    ToastUtil.showToast(activity, activity.getString(R.string.address_copied));
+//                    StringUtil.toClipboard(activity, swapPair.token1);
+//                    ToastUtil.showToast(activity, activity.getString(R.string.address_copied));
+                    WebUtil.toChainBrowser(SwapPairDetailActivity.this, swapPair.chain.browser, swapPair.token1);
                 }
             }
         });
