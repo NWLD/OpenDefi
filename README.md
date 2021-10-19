@@ -3,6 +3,9 @@
 2、HT MdexSwap<br/>
 3、OKT KSap、CherrySwap、JSwap<br/>
 4、CELO UbeSwap、SushiSwap<br/>
+5、FTM SpookySwap、SpiritSwap<br/>
+6、MATIC QuickSwap<br/>
+7、ETH UniSwapV2、SushiSwap<br/>
 # 监控Dex交易对池子信息，支持搜索交易对并添加监控
 1、池子大小变化<br/>
 2、价格变化<br/>

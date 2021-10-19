@@ -82,6 +82,7 @@ public class SwapPairWatchManager {
                         swapPair.address = jsonArray.getString(index);
                         swapPair.swap = swap;
                         swapPair.chain = swap.chain;
+                        swapPair.inWatchList = false;
                         addSwapPair(swapPair, true);
                     }
                 } catch (Exception e) {

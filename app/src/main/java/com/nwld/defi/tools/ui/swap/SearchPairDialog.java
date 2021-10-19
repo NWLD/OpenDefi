@@ -172,6 +172,7 @@ public class SearchPairDialog extends BaseDialog {
                     SPUtil.set(MyApp.getContext(), fileName, IntentConstant.pairs, jsonArray.toString());
                     SwapPairWatchManager.getInstance().addSwapPair(swapPair, true);
                     pairText.setText("");
+                    addButton.setEnabled(false);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
