@@ -13,3 +13,6 @@
 .externalNativeBuild
 .cxx
 local.properties
+/keystore.properties
+/defi.keystore
+key.properties

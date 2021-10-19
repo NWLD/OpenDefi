@@ -77,7 +77,7 @@ public class ChainConstant {
         sushiSwap.tokenSymbol = "SUSHI";
         sushiSwap.swapFactoryAddress = "0xc35DADB65012eC5796536bD9864eD8773aBc74C4";
         sushiSwap.swapRouterAddress = "0x1421bDe4B10e8dd459b3BCb598810B1337D56842";
-        sushiSwap.findAll = true;
+//        sushiSwap.findAll = true;
         CELO.addSwap(sushiSwap);
 
         Swap ubeSwap = new Swap();
@@ -148,6 +148,14 @@ public class ChainConstant {
         if (isFirstWatch) {
             JSONArray pairList = new JSONArray();
             pairList.put("0x16b9a82891338f9ba80e2d6970fdda79d1eb0dae");
+            pairList.put("0x42424A274592415bC3a98c8CcdE3830d3d336f8a");
+            pairList.put("0xDF3cABa6Cc555E3526F66C2aA389644bEbcdA823");
+            pairList.put("0xbcfd0d4a37fEb4dceAAeFa9da28CD833E5f04e9f");
+            pairList.put("0x6dB23b5360c9D2859fDcbf41c56494e7b8573649");
+            pairList.put("0xABc4337526255FD46E5FEDbdbA9a32AE1042505e");
+            pairList.put("0xD39F05AB936Aa201235005c47B83268f2d9833f8");
+            pairList.put("0xD89D71Fa750c899ED777a9237E4863c8e18a2576");
+            pairList.put("0xa487E06cB74790a09948a69C81A44a12f8FFA6C3");
             SPUtil.set(MyApp.getContext(), SwapPairWatchManager.swapFileName(pancakeSwap), IntentConstant.pairs, pairList.toString());
         }
         BNB.addSwap(pancakeSwap);
@@ -265,6 +273,11 @@ public class ChainConstant {
         quickSwap.tokenSymbol = "QUICK";
         quickSwap.swapFactoryAddress = "0x5757371414417b8C6CAad45bAeF941aBc7d3Ab32";
         quickSwap.swapRouterAddress = "0xa5E0829CaCEd8fFDD4De3c43696c57F7D7A678ff";
+        if (isFirstWatch) {
+            JSONArray wfcPairList = new JSONArray();
+            wfcPairList.put("0x6e7a5FAFcec6BB1e78bAE2A1F0B612012BF14827");
+            SPUtil.set(MyApp.getContext(), SwapPairWatchManager.swapFileName(quickSwap), IntentConstant.pairs, wfcPairList.toString());
+        }
         MATIC.addSwap(quickSwap);
         return MATIC;
     }
