@@ -70,7 +70,7 @@
             android:layout_marginLeft="10dp"
             android:gravity="center"
             android:text="Withdraw Wfce"
-            android:visibility="gone"
+            android:visibility="visible"
             android:background="@drawable/base_button"
             android:textColor="@color/base_button_title"
             android:textSize="@dimen/text" />

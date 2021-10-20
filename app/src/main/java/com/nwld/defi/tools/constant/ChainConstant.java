@@ -139,6 +139,14 @@ public class ChainConstant {
         BNB.browser = "https://bscscan.com";
         BNB.checkSell = "0x07038b34898b56fB6edbaAb9723ED3C30F8cd910";
 
+        Swap babySwap = new Swap();
+        babySwap.chain = BNB;
+        babySwap.name = "BabySwap";
+        babySwap.tokenSymbol = "BABY";
+        babySwap.swapFactoryAddress = "0x86407bEa2078ea5f5EB5A52B2caA963bC1F889Da";
+        babySwap.swapRouterAddress = "0x325E343f1dE602396E256B67eFd1F61C3A6B38Bd";
+        BNB.addSwap(babySwap);
+
         Swap pancakeSwap = new Swap();
         pancakeSwap.chain = BNB;
         pancakeSwap.name = "PancakeSwap";
