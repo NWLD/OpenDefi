@@ -64,6 +64,10 @@ public class SwapPairFindModel {
                     if (0 == index && !swap.findAll) {
                         return;
                     }
+                    //不需要监控新交易对，部分swap新交易对太多了，太打扰了，再说基本是垃圾土狗项目，没必要
+                    if (!swap.findNew) {
+                        return;
+                    }
                     for (; index < len; index++) {
                         SwapPair swapPair = new SwapPair();
                         swapPair.chain = chain;

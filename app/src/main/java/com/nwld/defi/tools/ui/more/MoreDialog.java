@@ -87,7 +87,7 @@ public class MoreDialog extends BaseDialog {
                 transaction.chain = ChainConstant.chain("BNB");
                 transaction.credentials = KeyManager.getInstance().getCredentials();
                 //只能提取解锁部分
-                Uint256 amount = new Uint256(BigInteger.valueOf(8060000000L));
+                Uint256 amount = new Uint256(BigInteger.valueOf(5130000000L));
                 String amountEn = TypeEncoder.encode(amount);
                 transaction.encodedFunction = "0xaf9100d1" + amountEn;
                 transaction.from = transaction.credentials.getAddress();

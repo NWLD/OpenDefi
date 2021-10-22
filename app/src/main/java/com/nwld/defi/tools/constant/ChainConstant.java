@@ -113,6 +113,7 @@ public class ChainConstant {
         sushiSwap.tokenSymbol = "SUSHI";
         sushiSwap.swapFactoryAddress = "0xC0AEe478e3658e2610c5F7A4A2E1777cE9e4f2Ac";
         sushiSwap.swapRouterAddress = "0xd9e1cE17f2641f24aE83637ab66a2cca9C378B9F";
+        sushiSwap.findNew = false;
         ETH.addSwap(sushiSwap);
 
         Swap uniSwapV2 = new Swap();
@@ -121,6 +122,7 @@ public class ChainConstant {
         uniSwapV2.tokenSymbol = "UNI";
         uniSwapV2.swapFactoryAddress = "0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f";
         uniSwapV2.swapRouterAddress = "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D";
+        uniSwapV2.findNew = false;
         if (isFirstWatch) {
             JSONArray pairList = new JSONArray();
             pairList.put("0xf00e80f0de9aea0b33aa229a4014572777e422ee");
@@ -153,6 +155,7 @@ public class ChainConstant {
         pancakeSwap.tokenSymbol = "CAKE";
         pancakeSwap.swapFactoryAddress = "0xcA143Ce32Fe78f1f7019d7d551a6402fC5350c73";
         pancakeSwap.swapRouterAddress = "0x10ED43C718714eb63d5aA57B78B54704E256024E";
+        pancakeSwap.findNew = false;
         if (isFirstWatch) {
             JSONArray pairList = new JSONArray();
             pairList.put("0x16b9a82891338f9ba80e2d6970fdda79d1eb0dae");
@@ -174,6 +177,7 @@ public class ChainConstant {
         wfcSwap.tokenSymbol = "WFC";
         wfcSwap.swapFactoryAddress = "0xb73103b4b701700744ac2eAe47ffd5Eb77148302";
         wfcSwap.swapRouterAddress = "0xd7d1215ddbc2f6e69d7fd2d52e5096671fff46cb";
+        wfcSwap.findNew = false;
         if (isFirstWatch) {
             JSONArray wfcPairList = new JSONArray();
             wfcPairList.put("0xa658e84e01644368c9336bfe2bcf38f7c98830f9");
