@@ -155,7 +155,7 @@ public class ChainConstant {
         pancakeSwap.tokenSymbol = "CAKE";
         pancakeSwap.swapFactoryAddress = "0xcA143Ce32Fe78f1f7019d7d551a6402fC5350c73";
         pancakeSwap.swapRouterAddress = "0x10ED43C718714eb63d5aA57B78B54704E256024E";
-        pancakeSwap.findNew = false;
+//        pancakeSwap.findNew = false;
         if (isFirstWatch) {
             JSONArray pairList = new JSONArray();
             pairList.put("0x16b9a82891338f9ba80e2d6970fdda79d1eb0dae");

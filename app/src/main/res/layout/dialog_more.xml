@@ -62,6 +62,34 @@
             android:textSize="@dimen/text" />
 
         <TextView
+            android:id="@+id/buy_nft"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:gravity="center"
+            android:text="Buy NFT"
+            android:visibility="gone"
+            android:background="@drawable/base_warning_button"
+            android:textColor="@color/base_button_title"
+            android:textSize="@dimen/text" />
+
+        <TextView
+            android:id="@+id/valk"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:gravity="center"
+            android:text="Valk"
+            android:visibility="visible"
+            android:background="@drawable/base_warning_button"
+            android:textColor="@color/base_button_title"
+            android:textSize="@dimen/text" />
+
+        <TextView
             android:id="@+id/withdraw_wfce"
             android:layout_width="match_parent"
             android:layout_height="40dp"
@@ -70,7 +98,7 @@
             android:layout_marginLeft="10dp"
             android:gravity="center"
             android:text="Withdraw Wfce"
-            android:visibility="visible"
+            android:visibility="gone"
             android:background="@drawable/base_button"
             android:textColor="@color/base_button_title"
             android:textSize="@dimen/text" />

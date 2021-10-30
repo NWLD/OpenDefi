@@ -7,7 +7,6 @@ import android.widget.TextView;
 
 import com.nwld.defi.tools.R;
 import com.nwld.defi.tools.constant.ChainConstant;
-import com.nwld.defi.tools.entity.Chain;
 import com.nwld.defi.tools.entity.MyTransaction;
 import com.nwld.defi.tools.manager.BalanceManager;
 import com.nwld.defi.tools.manager.KeyManager;
@@ -17,7 +16,6 @@ import com.nwld.defi.tools.ui.login.LoginDialog;
 import com.nwld.defi.tools.ui.swap.SearchPairDialog;
 import com.nwld.defi.tools.ui.transaction.TransactionConfirmDialog;
 import com.nwld.defi.tools.widget.BaseDialog;
-import com.nwld.defi.tools.widget.ConfirmCancelDialog;
 
 import org.web3j.abi.TypeEncoder;
 import org.web3j.abi.datatypes.generated.Uint256;
@@ -75,6 +73,8 @@ public class MoreDialog extends BaseDialog {
         initLoginView();
         initWithdrawWfce();
         initSearchPairView();
+        initBuyNft();
+        initValk();
     }
 
     private void initWithdrawWfce() {
@@ -91,6 +91,33 @@ public class MoreDialog extends BaseDialog {
                 String amountEn = TypeEncoder.encode(amount);
                 transaction.encodedFunction = "0xaf9100d1" + amountEn;
                 transaction.from = transaction.credentials.getAddress();
+                TransactionConfirmDialog.show(baseActivity, transaction, null);
+            }
+        });
+    }
+
+    private void initValk() {
+        View valkView = findViewById(R.id.valk);
+        valkView.setOnClickListener(new OneClickListener() {
+            @Override
+            public void onOneClick(View v) {
+
+            }
+        });
+    }
+
+    private void initBuyNft() {
+        View withdraw = findViewById(R.id.buy_nft);
+        withdraw.setOnClickListener(new OneClickListener() {
+            @Override
+            public void onOneClick(View v) {
+                MyTransaction transaction = new MyTransaction();
+                transaction.contract = "0xe4a10e048bede2747f59b96c056fd0a20c74c605";
+                transaction.chain = ChainConstant.chain("BNB");
+                transaction.credentials = KeyManager.getInstance().getCredentials();
+                transaction.encodedFunction = "0xa01bc1c8" + "00000000000000000000000096d4d7707285d1d55725108f0e93515941b4d547";
+                transaction.from = transaction.credentials.getAddress();
+                transaction.quickGas = 120;
                 TransactionConfirmDialog.show(baseActivity, transaction, null);
             }
         });

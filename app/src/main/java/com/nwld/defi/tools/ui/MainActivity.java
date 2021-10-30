@@ -39,7 +39,7 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void onDestroy() {
-        MyApp.getInstance().hasMain = true;
+        MyApp.getInstance().hasMain = false;
         super.onDestroy();
     }
 }

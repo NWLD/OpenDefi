@@ -359,9 +359,9 @@ public class SwapPairDetailActivity extends BaseActivity {
                     String address = Keys.toChecksumAddress(credentials.getAddress());
                     ERC20Model model = new ERC20Model(swapPair.chain);
                     MyTransaction transaction = model.approveTransaction(
-                            swapPair.swap.swapRouterAddress, CalcUtils.pow("10", token0.decimals + 18), address, swapPair.token0
+                            swapPair.swap.swapRouterAddress, CalcUtils.pow("10", 64 - token0.decimals), address, swapPair.token0
                     );
-                    transaction.showValue = CalcUtils.pow("10", 18).toString() + " " + token0.symbol;
+                    transaction.showValue = CalcUtils.pow("10", 64 - token0.decimals).toString() + " " + token0.symbol;
                     transaction.credentials = credentials;
                     transaction.isApproval = true;
                     TransactionConfirmDialog.show(SwapPairDetailActivity.this, transaction, new TransactionConfirmDialog.OnTransactionHash() {
@@ -384,7 +384,7 @@ public class SwapPairDetailActivity extends BaseActivity {
         quickSwap0View.setOnClickListener(new OneClickListener() {
             @Override
             public void onOneClick(View v) {
-                swap0(40, 160);
+                swap0(50, 160);
             }
         });
 
@@ -409,9 +409,9 @@ public class SwapPairDetailActivity extends BaseActivity {
                     String address = Keys.toChecksumAddress(credentials.getAddress());
                     ERC20Model model = new ERC20Model(swapPair.chain);
                     MyTransaction transaction = model.approveTransaction(
-                            swapPair.swap.swapRouterAddress, CalcUtils.pow("10", token1.decimals + 18), address, swapPair.token1
+                            swapPair.swap.swapRouterAddress, CalcUtils.pow("10", 64 - token1.decimals), address, swapPair.token1
                     );
-                    transaction.showValue = CalcUtils.pow("10", 18).toString() + " " + token1.symbol;
+                    transaction.showValue = CalcUtils.pow("10", 64 - token1.decimals).toString() + " " + token1.symbol;
                     transaction.credentials = credentials;
                     transaction.isApproval = true;
                     TransactionConfirmDialog.show(SwapPairDetailActivity.this, transaction, new TransactionConfirmDialog.OnTransactionHash() {
@@ -434,7 +434,7 @@ public class SwapPairDetailActivity extends BaseActivity {
         quickSwap1View.setOnClickListener(new OneClickListener() {
             @Override
             public void onOneClick(View v) {
-                swap1(40, 160);
+                swap1(50, 160);
             }
         });
 
@@ -621,6 +621,7 @@ public class SwapPairDetailActivity extends BaseActivity {
                 if (0 == input.compareTo(BigInteger.ZERO)) {
                     return;
                 }
+                setApprove0ButtonStatus(input);
                 List<String> path = new ArrayList<>();
                 path.add(swapPair.token0);
                 path.add(swapPair.token1);
@@ -696,6 +697,7 @@ public class SwapPairDetailActivity extends BaseActivity {
                 if (0 == input.compareTo(BigInteger.ZERO)) {
                     return;
                 }
+                setApprove1ButtonStatus(input);
                 List<String> path = new ArrayList<>();
                 path.add(swapPair.token1);
                 path.add(swapPair.token0);
