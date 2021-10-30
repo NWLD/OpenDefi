@@ -113,7 +113,7 @@ public class ChainConstant {
         sushiSwap.tokenSymbol = "SUSHI";
         sushiSwap.swapFactoryAddress = "0xC0AEe478e3658e2610c5F7A4A2E1777cE9e4f2Ac";
         sushiSwap.swapRouterAddress = "0xd9e1cE17f2641f24aE83637ab66a2cca9C378B9F";
-        sushiSwap.findNew = false;
+//        sushiSwap.findNew = false;
         ETH.addSwap(sushiSwap);
 
         Swap uniSwapV2 = new Swap();
@@ -122,7 +122,7 @@ public class ChainConstant {
         uniSwapV2.tokenSymbol = "UNI";
         uniSwapV2.swapFactoryAddress = "0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f";
         uniSwapV2.swapRouterAddress = "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D";
-        uniSwapV2.findNew = false;
+//        uniSwapV2.findNew = false;
         if (isFirstWatch) {
             JSONArray pairList = new JSONArray();
             pairList.put("0xf00e80f0de9aea0b33aa229a4014572777e422ee");
