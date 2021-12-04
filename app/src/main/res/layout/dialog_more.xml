@@ -70,7 +70,7 @@
             android:layout_marginLeft="10dp"
             android:gravity="center"
             android:text="Buy NFT"
-            android:visibility="gone"
+            android:visibility="visible"
             android:background="@drawable/base_warning_button"
             android:textColor="@color/base_button_title"
             android:textSize="@dimen/text" />
@@ -113,7 +113,6 @@
             android:gravity="center"
             android:textColor="@color/base_button_title"
             android:textSize="@dimen/text" />
-
 
     </LinearLayout>
 </LinearLayout>

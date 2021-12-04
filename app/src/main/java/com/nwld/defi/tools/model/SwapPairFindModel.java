@@ -52,7 +52,7 @@ public class SwapPairFindModel {
                 try {
                     SwapFactoryRepository swapFactoryRepository = new SwapFactoryRepository(chain, swap.swapFactoryAddress);
                     int len = swapFactoryRepository.allPairsLength().intValue();
-                    LogUtil.e(chain.symbol + "::" + swap.name, len);
+//                    LogUtil.e(chain.symbol + "::" + swap.name, len);
                     if (len <= lastLength) {
                         return;
                     }
@@ -114,16 +114,16 @@ public class SwapPairFindModel {
                     swapPair.token0InitBalance = swapPair.token0Balance;
                     swapPair.token1InitBalance = swapPair.token1Balance;
                     //余额为0，过3秒再拉取一次试试
-                    if (swapPair.token0InitBalance.equals(BigInteger.ZERO)
-                            && swapPair.token1InitBalance.equals(BigInteger.ZERO)) {
-                        Thread.sleep(3000);
-                        service.erc20Address = swapPair.token0;
-                        swapPair.token0Balance = service.balanceOf(swapPair.address);
-                        service.erc20Address = swapPair.token1;
-                        swapPair.token1Balance = service.balanceOf(swapPair.address);
-                        swapPair.token0InitBalance = swapPair.token0Balance;
-                        swapPair.token1InitBalance = swapPair.token1Balance;
-                    }
+//                    if (swapPair.token0InitBalance.equals(BigInteger.ZERO)
+//                            && swapPair.token1InitBalance.equals(BigInteger.ZERO)) {
+//                        Thread.sleep(3000);
+//                        service.erc20Address = swapPair.token0;
+//                        swapPair.token0Balance = service.balanceOf(swapPair.address);
+//                        service.erc20Address = swapPair.token1;
+//                        swapPair.token1Balance = service.balanceOf(swapPair.address);
+//                        swapPair.token0InitBalance = swapPair.token0Balance;
+//                        swapPair.token1InitBalance = swapPair.token1Balance;
+//                    }
                     confirmERC20Token(swapPair);
                 } catch (Exception e) {
                     e.printStackTrace();

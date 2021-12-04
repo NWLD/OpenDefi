@@ -135,11 +135,19 @@ public class ChainConstant {
     private static Chain BNB(boolean isFirstWatch) {
         Chain BNB = new Chain();
         BNB.chainId = 56;
-        BNB.rpcUrl = "https://bsc-dataseed1.binance.org";
+        BNB.rpcUrl = "https://bsc-dataseed1.binance.org";//"https://bsc-dataseed4.ninicoin.io";//"https://bsc-dataseed1.binance.org";
         BNB.symbol = "BNB";
         BNB.decimals = 18;
         BNB.browser = "https://bscscan.com";
         BNB.checkSell = "0x07038b34898b56fB6edbaAb9723ED3C30F8cd910";
+
+        Swap mdexSwap = new Swap();
+        mdexSwap.chain = BNB;
+        mdexSwap.name = "MdexSwap";
+        mdexSwap.tokenSymbol = "MDX";
+        mdexSwap.swapFactoryAddress = "0x3CD1C46068dAEa5Ebb0d3f55F6915B10648062B8";
+        mdexSwap.swapRouterAddress = "0x7DAe51BD3E3376B8c7c4900E9107f12Be3AF1bA8";
+        BNB.addSwap(mdexSwap);
 
         Swap babySwap = new Swap();
         babySwap.chain = BNB;

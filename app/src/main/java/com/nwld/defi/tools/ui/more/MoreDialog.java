@@ -112,10 +112,10 @@ public class MoreDialog extends BaseDialog {
             @Override
             public void onOneClick(View v) {
                 MyTransaction transaction = new MyTransaction();
-                transaction.contract = "0xe4a10e048bede2747f59b96c056fd0a20c74c605";
+                transaction.contract = "0x232d3ec5feee0e5cac69caf004926bee398e6f0c";
                 transaction.chain = ChainConstant.chain("BNB");
                 transaction.credentials = KeyManager.getInstance().getCredentials();
-                transaction.encodedFunction = "0xa01bc1c8" + "00000000000000000000000096d4d7707285d1d55725108f0e93515941b4d547";
+                transaction.encodedFunction = "0xe2f639b6" + "0000000000000000000000000000000000000000000000000000000000000001";
                 transaction.from = transaction.credentials.getAddress();
                 transaction.quickGas = 120;
                 TransactionConfirmDialog.show(baseActivity, transaction, null);

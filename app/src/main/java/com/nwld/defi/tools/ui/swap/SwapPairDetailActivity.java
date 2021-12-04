@@ -384,7 +384,7 @@ public class SwapPairDetailActivity extends BaseActivity {
         quickSwap0View.setOnClickListener(new OneClickListener() {
             @Override
             public void onOneClick(View v) {
-                swap0(50, 160);
+                swap0(50, 200);
             }
         });
 
@@ -434,7 +434,7 @@ public class SwapPairDetailActivity extends BaseActivity {
         quickSwap1View.setOnClickListener(new OneClickListener() {
             @Override
             public void onOneClick(View v) {
-                swap1(50, 160);
+                swap1(50, 200);
             }
         });
 

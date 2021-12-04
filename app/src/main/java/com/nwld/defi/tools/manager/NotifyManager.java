@@ -20,6 +20,8 @@ import com.nwld.defi.tools.ui.SchemeActivity;
 import com.nwld.defi.tools.util.CalcUtils;
 import com.nwld.defi.tools.util.StringUtil;
 
+import java.math.BigInteger;
+
 public class NotifyManager {
     public int notifyId = 2;
 
@@ -36,6 +38,15 @@ public class NotifyManager {
     }
 
     public void showNewPair(SwapPair swapPair, ERC20 token0, ERC20 token1) {
+        if (swapPair.token1InitBalance.equals(BigInteger.ZERO)
+                && swapPair.token0InitBalance.equals(BigInteger.ZERO)) {
+
+        } else if (Double.parseDouble(CalcUtils.decimals(swapPair.token1InitBalance, token1.decimals)) >= 20
+                && Double.parseDouble(CalcUtils.decimals(swapPair.token0InitBalance, token0.decimals)) >= 20) {
+
+        } else {
+            return;
+        }
         MainHandler.getHandler().post(new Runnable() {
             @Override
             public void run() {
