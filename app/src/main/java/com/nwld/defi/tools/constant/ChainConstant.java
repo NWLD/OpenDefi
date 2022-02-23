@@ -35,6 +35,10 @@ public class ChainConstant {
             chainList.add(HT);
             chainMap.put(HT.symbol, HT);
 
+            Chain ROSE = ROSE();
+            chainList.add(ROSE);
+            chainMap.put(ROSE.symbol, ROSE);
+
             Chain OKT = OKT();
             chainList.add(OKT);
             chainMap.put(OKT.symbol, OKT);
@@ -250,6 +254,28 @@ public class ChainConstant {
         HT.addSwap(mdex);
         return HT;
     }
+
+    private static Chain ROSE() {
+        Chain ROSE = new Chain();
+        ROSE.chainId = 42262;
+        ROSE.rpcUrl = "https://emerald.oasis.dev";
+        ROSE.symbol = "ROSE";
+        ROSE.decimals = 18;
+        ROSE.browser = "https://explorer.emerald.oasis.dev";
+        ROSE.checkSell = "0x5EF3017b9d46230e85a2EEc768E156Ea891298fD";
+
+        Swap swap = new Swap();
+        swap.findAll = true;
+        swap.findNew = true;
+        swap.chain = ROSE;
+        swap.name = "YUZU";
+        swap.tokenSymbol = "YUZU";
+        swap.swapFactoryAddress = "0x5F50fDC22697591c1D7BfBE8021163Fc73513653";
+        swap.swapRouterAddress = "0x250d48C5E78f1E85F7AB07FEC61E93ba703aE668";
+        ROSE.addSwap(swap);
+        return ROSE;
+    }
+
 
     private static Chain FTM(boolean isFirstWatch) {
         Chain FTM = new Chain();

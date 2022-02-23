@@ -15,13 +15,26 @@ import com.nwld.defi.tools.ui.OneClickListener;
 import com.nwld.defi.tools.ui.login.LoginDialog;
 import com.nwld.defi.tools.ui.swap.SearchPairDialog;
 import com.nwld.defi.tools.ui.transaction.TransactionConfirmDialog;
+import com.nwld.defi.tools.util.LogUtil;
 import com.nwld.defi.tools.widget.BaseDialog;
 
+import org.web3j.abi.FunctionEncoder;
 import org.web3j.abi.TypeEncoder;
+import org.web3j.abi.datatypes.Address;
+import org.web3j.abi.datatypes.DynamicArray;
+import org.web3j.abi.datatypes.Function;
+import org.web3j.abi.datatypes.Utf8String;
 import org.web3j.abi.datatypes.generated.Uint256;
 import org.web3j.crypto.Credentials;
+import org.web3j.crypto.Hash;
+import org.web3j.crypto.Sign;
+import org.web3j.utils.Numeric;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 public class MoreDialog extends BaseDialog {
 
@@ -82,19 +95,44 @@ public class MoreDialog extends BaseDialog {
         withdraw.setOnClickListener(new OneClickListener() {
             @Override
             public void onOneClick(View v) {
-                MyTransaction transaction = new MyTransaction();
-                transaction.contract = "0x3BB4Db87DD2e67deF8a9c8673e802C10ff8b107F";
-                transaction.chain = ChainConstant.chain("BNB");
-                transaction.credentials = KeyManager.getInstance().getCredentials();
-                //只能提取解锁部分
-                Uint256 amount = new Uint256(BigInteger.valueOf(5130000000L));
-                String amountEn = TypeEncoder.encode(amount);
-                transaction.encodedFunction = "0xaf9100d1" + amountEn;
-                transaction.from = transaction.credentials.getAddress();
-                TransactionConfirmDialog.show(baseActivity, transaction, null);
+//                MyTransaction transaction = new MyTransaction();
+//                transaction.contract = "0x3BB4Db87DD2e67deF8a9c8673e802C10ff8b107F";
+//                transaction.chain = ChainConstant.chain("BNB");
+//                transaction.credentials = KeyManager.getInstance().getCredentials();
+//                //只能提取解锁部分
+//                Uint256 amount = new Uint256(BigInteger.valueOf(5130000000L));
+//                String amountEn = TypeEncoder.encode(amount);
+//                transaction.encodedFunction = "0xaf9100d1" + amountEn;
+//                transaction.from = transaction.credentials.getAddress();
+//                TransactionConfirmDialog.show(baseActivity, transaction, null);
+
+//                MyTransaction transaction = new MyTransaction();
+//                transaction.contract = "0xc1fae1924303cc7a816919b7a3935cda8bf8ef3d";
+//                transaction.chain = ChainConstant.chain("MATIC");
+//                transaction.credentials = KeyManager.getInstance().getCredentials();
+//                Function fun = new Function(
+//                        "buyAndFree22457070633",
+//                        Arrays.asList(new Utf8String("邓浩发")),
+//                        Collections.emptyList());
+//                String encodedFunction = FunctionEncoder.encode(fun);
+//                LogUtil.e("encodedFunction",encodedFunction);
+//
+//                transaction.encodedFunction = "0x00000000"+encodedFunction.substring(10,encodedFunction.length());
+//                transaction.from = transaction.credentials.getAddress();
+//                LogUtil.e("encoded",transaction.encodedFunction);
+//                TransactionConfirmDialog.show(baseActivity, transaction, null);
+
+//                Sign.signedPrefixedMessageToKey("",KeyManager.getInstance().getCredentials().getEcKeyPair());
             }
         });
     }
+
+    private String sha3(String str){
+        final byte[] input = str.getBytes();
+        final byte[] hash = Hash.sha3(input);
+        return Numeric.toHexString(hash);
+    }
+
 
     private void initValk() {
         View valkView = findViewById(R.id.valk);

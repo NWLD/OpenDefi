@@ -377,14 +377,14 @@ public class SwapPairDetailActivity extends BaseActivity {
         swap0View.setOnClickListener(new OneClickListener() {
             @Override
             public void onOneClick(View v) {
-                swap0(80, 110);
+                swap0(995, 110);
             }
         });
 
         quickSwap0View.setOnClickListener(new OneClickListener() {
             @Override
             public void onOneClick(View v) {
-                swap0(50, 200);
+                swap0(800, 200);
             }
         });
 
@@ -427,14 +427,14 @@ public class SwapPairDetailActivity extends BaseActivity {
         swap1View.setOnClickListener(new OneClickListener() {
             @Override
             public void onOneClick(View v) {
-                swap1(80, 110);
+                swap1(995, 110);
             }
         });
 
         quickSwap1View.setOnClickListener(new OneClickListener() {
             @Override
             public void onOneClick(View v) {
-                swap1(50, 200);
+                swap1(800, 200);
             }
         });
 
@@ -532,7 +532,7 @@ public class SwapPairDetailActivity extends BaseActivity {
             BigInteger in = CalcUtils.pow(token0OutEdit.getText().toString(), token0.decimals);
             //默认20%滑点
             BigInteger out = CalcUtils.pow(token1InText.getText().toString(), token1.decimals)
-                    .multiply(BigInteger.valueOf(slide)).divide(BigInteger.valueOf(100));
+                    .multiply(BigInteger.valueOf(slide)).divide(BigInteger.valueOf(1000));
             List<String> path = new ArrayList<>();
             path.add(swapPair.token0);
             path.add(swapPair.token1);
@@ -554,7 +554,7 @@ public class SwapPairDetailActivity extends BaseActivity {
             BigInteger in = CalcUtils.pow(token1OutEdit.getText().toString(), token1.decimals);
             //默认20%滑点
             BigInteger out = CalcUtils.pow(token0InText.getText().toString(), token0.decimals)
-                    .multiply(BigInteger.valueOf(slide)).divide(BigInteger.valueOf(100));
+                    .multiply(BigInteger.valueOf(slide)).divide(BigInteger.valueOf(1000));
             List<String> path = new ArrayList<>();
             path.add(swapPair.token1);
             path.add(swapPair.token0);
