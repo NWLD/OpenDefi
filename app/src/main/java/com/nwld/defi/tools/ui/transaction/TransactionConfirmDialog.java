@@ -26,6 +26,7 @@ public class TransactionConfirmDialog extends BaseDialog {
 
     MyTransaction transaction;
     OnTransactionHash onTransactionHash;
+    boolean autoConfirm;
 
     public TransactionConfirmDialog(BaseActivity context, MyTransaction transaction) {
         super(context);
@@ -34,6 +35,10 @@ public class TransactionConfirmDialog extends BaseDialog {
     }
 
     public static void show(BaseActivity activity, MyTransaction transaction, OnTransactionHash onTransactionHash) {
+        show(activity, transaction, onTransactionHash, false);
+    }
+
+    public static void show(BaseActivity activity, MyTransaction transaction, OnTransactionHash onTransactionHash, boolean autoConfirm) {
         activity.showLoading();
         BaseExecutor.getInstance().execute(new BaseTask() {
             @Override
@@ -48,6 +53,7 @@ public class TransactionConfirmDialog extends BaseDialog {
                             }
                             TransactionConfirmDialog dialog = new TransactionConfirmDialog(activity, transaction);
                             dialog.onTransactionHash = onTransactionHash;
+                            dialog.autoConfirm = autoConfirm;
                             activity.hideLoading();
                             dialog.show();
                         }
@@ -145,40 +151,47 @@ public class TransactionConfirmDialog extends BaseDialog {
         confirmButton.setOnClickListener(new OneClickListener() {
             @Override
             public void onOneClick(View v) {
-                baseActivity.showLoading();
-                BaseExecutor.getInstance().execute(new BaseTask() {
-                    @Override
-                    public void run() {
-                        try {
-                            String hash = Web3Util.getInstance().execute(transaction);
-                            LogUtil.e("hash", hash);
-                            MainHandler.getHandler().post(new Runnable() {
-                                @Override
-                                public void run() {
-                                    baseActivity.hideLoading();
-                                    if (null != onTransactionHash) {
-                                        onTransactionHash.onHash(hash);
-                                    }
-                                    hideThisDialog();
-                                }
-                            });
-                        } catch (Exception e) {
-                            MainHandler.getHandler().post(new Runnable() {
-                                @Override
-                                public void run() {
-                                    baseActivity.hideLoading();
-                                }
-                            });
-                            e.printStackTrace();
-                        }
-                    }
-                });
+                confirmAction();
             }
         });
         //只显示，不发起交易
         if (transaction.justShow) {
             confirmButton.setEnabled(false);
         }
+        if (autoConfirm) {
+            confirmAction();
+        }
+    }
+
+    private void confirmAction() {
+        baseActivity.showLoading();
+        BaseExecutor.getInstance().execute(new BaseTask() {
+            @Override
+            public void run() {
+                try {
+                    String hash = Web3Util.getInstance().execute(transaction);
+                    LogUtil.e("hash", hash);
+                    MainHandler.getHandler().post(new Runnable() {
+                        @Override
+                        public void run() {
+                            baseActivity.hideLoading();
+                            if (null != onTransactionHash) {
+                                onTransactionHash.onHash(hash);
+                            }
+                            hideThisDialog();
+                        }
+                    });
+                } catch (Exception e) {
+                    MainHandler.getHandler().post(new Runnable() {
+                        @Override
+                        public void run() {
+                            baseActivity.hideLoading();
+                        }
+                    });
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
 }

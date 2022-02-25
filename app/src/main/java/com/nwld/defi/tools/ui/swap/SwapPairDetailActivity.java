@@ -71,6 +71,7 @@ public class SwapPairDetailActivity extends BaseActivity {
     View approve0View;
     View swap0View;
     View quickSwap0View;
+    View feeSwap0View;
     View checkSell0View;
 
     LinearLayout address1layout;
@@ -82,6 +83,7 @@ public class SwapPairDetailActivity extends BaseActivity {
     SwapPair swapPair;
     View approve1View;
     View swap1View;
+    View feeSwap1View;
     View quickSwap1View;
     View checkSell1View;
 
@@ -275,6 +277,7 @@ public class SwapPairDetailActivity extends BaseActivity {
         approve0View = itemView.findViewById(R.id.item_token0_approve);
         swap0View = itemView.findViewById(R.id.item_token0_swap);
         quickSwap0View = itemView.findViewById(R.id.item_token0_quick_swap);
+        feeSwap0View = itemView.findViewById(R.id.item_token0_fee_swap);
         checkSell0View = itemView.findViewById(R.id.item_token0_check_sell);
 
         address1layout = itemView.findViewById(R.id.item_token1_address_layout);
@@ -286,6 +289,7 @@ public class SwapPairDetailActivity extends BaseActivity {
         approve1View = itemView.findViewById(R.id.item_token1_approve);
         swap1View = itemView.findViewById(R.id.item_token1_swap);
         quickSwap1View = itemView.findViewById(R.id.item_token1_quick_swap);
+        feeSwap1View = itemView.findViewById(R.id.item_token1_fee_swap);
         checkSell1View = itemView.findViewById(R.id.item_token1_check_sell);
 
         price0Text = itemView.findViewById(R.id.item_token0_price);
@@ -377,14 +381,21 @@ public class SwapPairDetailActivity extends BaseActivity {
         swap0View.setOnClickListener(new OneClickListener() {
             @Override
             public void onOneClick(View v) {
-                swap0(995, 110);
+                swap0(995, 110, false);
+            }
+        });
+
+        feeSwap0View.setOnClickListener(new OneClickListener() {
+            @Override
+            public void onOneClick(View v) {
+                swap0(800, 110, false);
             }
         });
 
         quickSwap0View.setOnClickListener(new OneClickListener() {
             @Override
             public void onOneClick(View v) {
-                swap0(800, 200);
+                swap0(400, 200, true);
             }
         });
 
@@ -427,14 +438,21 @@ public class SwapPairDetailActivity extends BaseActivity {
         swap1View.setOnClickListener(new OneClickListener() {
             @Override
             public void onOneClick(View v) {
-                swap1(995, 110);
+                swap1(995, 110, false);
+            }
+        });
+
+        feeSwap1View.setOnClickListener(new OneClickListener() {
+            @Override
+            public void onOneClick(View v) {
+                swap1(800, 110, false);
             }
         });
 
         quickSwap1View.setOnClickListener(new OneClickListener() {
             @Override
             public void onOneClick(View v) {
-                swap1(800, 200);
+                swap1(400, 200, true);
             }
         });
 
@@ -526,7 +544,7 @@ public class SwapPairDetailActivity extends BaseActivity {
         }
     }
 
-    private void swap0(int slide, int quickGas) {
+    private void swap0(int slide, int quickGas, boolean autoConfirm) {
         Credentials credentials = getCredentialsNullLogin();
         if (null != credentials) {
             BigInteger in = CalcUtils.pow(token0OutEdit.getText().toString(), token0.decimals);
@@ -544,11 +562,11 @@ public class SwapPairDetailActivity extends BaseActivity {
             transaction.showValue = token0OutEdit.getText().toString() + " " + token0.symbol;
             transaction.credentials = credentials;
             transaction.quickGas = quickGas;
-            TransactionConfirmDialog.show(SwapPairDetailActivity.this, transaction, null);
+            TransactionConfirmDialog.show(SwapPairDetailActivity.this, transaction, null, autoConfirm);
         }
     }
 
-    private void swap1(int slide, int quickGas) {
+    private void swap1(int slide, int quickGas, boolean autoConfirm) {
         Credentials credentials = getCredentialsNullLogin();
         if (null != credentials) {
             BigInteger in = CalcUtils.pow(token1OutEdit.getText().toString(), token1.decimals);
@@ -566,7 +584,7 @@ public class SwapPairDetailActivity extends BaseActivity {
             transaction.showValue = token1OutEdit.getText().toString() + " " + token1.symbol;
             transaction.credentials = credentials;
             transaction.quickGas = quickGas;
-            TransactionConfirmDialog.show(SwapPairDetailActivity.this, transaction, null);
+            TransactionConfirmDialog.show(SwapPairDetailActivity.this, transaction, null, autoConfirm);
         }
     }
 
@@ -883,10 +901,12 @@ public class SwapPairDetailActivity extends BaseActivity {
             approve0View.setVisibility(View.VISIBLE);
             swap0View.setEnabled(false);
             quickSwap0View.setVisibility(View.GONE);
+            feeSwap0View.setVisibility(View.GONE);
         } else {
             approve0View.setVisibility(View.GONE);
             swap0View.setEnabled(true);
             quickSwap0View.setVisibility(View.VISIBLE);
+            feeSwap0View.setVisibility(View.VISIBLE);
         }
     }
 
@@ -897,10 +917,12 @@ public class SwapPairDetailActivity extends BaseActivity {
             approve1View.setVisibility(View.VISIBLE);
             swap1View.setEnabled(false);
             quickSwap1View.setVisibility(View.GONE);
+            feeSwap1View.setVisibility(View.GONE);
         } else {
             approve1View.setVisibility(View.GONE);
             swap1View.setEnabled(true);
             quickSwap1View.setVisibility(View.VISIBLE);
+            feeSwap1View.setVisibility(View.VISIBLE);
         }
     }
 

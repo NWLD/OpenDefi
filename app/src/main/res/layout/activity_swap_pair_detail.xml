@@ -354,11 +354,24 @@
                     android:textSize="@dimen/des" />
 
                 <TextView
+                    android:id="@+id/item_token0_fee_swap"
+                    android:layout_width="0dp"
+                    android:layout_height="32dp"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="5dp"
+                    android:visibility="gone"
+                    android:background="@drawable/base_warning_button"
+                    android:gravity="center"
+                    android:text="@string/fee_swap"
+                    android:textColor="@color/base_button_title"
+                    android:textSize="@dimen/des" />
+
+                <TextView
                     android:id="@+id/item_token0_quick_swap"
                     android:layout_width="0dp"
                     android:layout_height="32dp"
                     android:layout_weight="1"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="5dp"
                     android:visibility="gone"
                     android:background="@drawable/base_warning_button"
                     android:gravity="center"
@@ -474,11 +487,24 @@
                     android:textSize="@dimen/des" />
 
                 <TextView
+                    android:id="@+id/item_token1_fee_swap"
+                    android:layout_width="0dp"
+                    android:layout_height="32dp"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="5dp"
+                    android:visibility="gone"
+                    android:background="@drawable/base_warning_button"
+                    android:gravity="center"
+                    android:text="@string/fee_swap"
+                    android:textColor="@color/base_button_title"
+                    android:textSize="@dimen/des" />
+
+                <TextView
                     android:id="@+id/item_token1_quick_swap"
                     android:layout_width="0dp"
                     android:layout_height="32dp"
                     android:layout_weight="1"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="5dp"
                     android:visibility="gone"
                     android:background="@drawable/base_warning_button"
                     android:gravity="center"
