@@ -58,6 +58,10 @@ public class ChainConstant {
             Chain MATIC = MATIC(isFirstWatch);
             chainList.add(MATIC);
             chainMap.put(MATIC.symbol, MATIC);
+
+            Chain METIS = METIS(isFirstWatch);
+            chainList.add(METIS);
+            chainMap.put(METIS.symbol, METIS);
         }
         return chainList;
     }
@@ -327,4 +331,29 @@ public class ChainConstant {
         MATIC.addSwap(quickSwap);
         return MATIC;
     }
+
+    private static Chain METIS(boolean isFirstWatch) {
+        Chain METIS = new Chain();
+        METIS.chainId = 1088;
+        METIS.rpcUrl = "https://andromeda.metis.io/?owner=1088";
+        METIS.symbol = "METIS";
+        METIS.decimals = 18;
+        METIS.browser = "https://andromeda-explorer.metis.io";
+
+        Swap nettySwap = new Swap();
+        nettySwap.chain = METIS;
+        nettySwap.name = "NetSwap";
+        nettySwap.tokenSymbol = "NETT";
+        nettySwap.swapFactoryAddress = "0x70f51d68D16e8f9e418441280342BD43AC9Dff9f";
+        nettySwap.swapRouterAddress = "0x1E876cCe41B7b844FDe09E38Fa1cf00f213bFf56";
+        if (isFirstWatch) {
+            JSONArray pairList = new JSONArray();
+            pairList.put("0x5Ae3ee7fBB3Cb28C17e7ADc3a6Ae605ae2465091");
+            SPUtil.set(MyApp.getContext(), SwapPairWatchManager.swapFileName(nettySwap), IntentConstant.pairs, pairList.toString());
+        }
+        METIS.addSwap(nettySwap);
+        return METIS;
+    }
+
+
 }
