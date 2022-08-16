@@ -132,6 +132,51 @@
                 android:layout_width="match_parent"
                 android:orientation="horizontal"
                 android:layout_margin="10dp"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/x2gas"
+                    android:textColor="@color/base_button_title"
+                    android:textSize="@dimen/title"
+                    android:background="@drawable/base_button"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="x2 Gas"
+                    android:layout_marginRight="15dp"
+                    android:layout_height="40dp"/>
+
+                <TextView
+                    android:id="@+id/x3gas"
+                    android:textColor="@color/base_button_title"
+                    android:textSize="@dimen/title"
+                    android:background="@drawable/base_button"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:text="x3 Gas"
+                    android:layout_height="40dp"/>
+
+                <TextView
+                    android:id="@+id/x5gas"
+                    android:textColor="@color/base_button_title"
+                    android:textSize="@dimen/title"
+                    android:background="@drawable/base_warning_button"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:layout_marginLeft="15dp"
+                    android:text="x5 Gas"
+                    android:layout_height="40dp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:layout_margin="10dp"
                 android:gravity="bottom"
                 android:paddingBottom="20dp"
                 android:layout_height="match_parent">

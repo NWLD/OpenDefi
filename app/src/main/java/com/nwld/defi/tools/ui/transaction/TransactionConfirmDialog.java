@@ -18,6 +18,8 @@ import com.nwld.defi.tools.util.ToastUtil;
 import com.nwld.defi.tools.web3.Web3Util;
 import com.nwld.defi.tools.widget.BaseDialog;
 
+import java.math.BigInteger;
+
 public class TransactionConfirmDialog extends BaseDialog {
 
     public interface OnTransactionHash {
@@ -125,6 +127,10 @@ public class TransactionConfirmDialog extends BaseDialog {
     private TextView gasText;
     private TextView gasDetailText;
 
+    private TextView x2gasButton;
+    private TextView x3gasButton;
+    private TextView x5gasButton;
+
     public void initTransactionView() {
         confirmButton = findViewById(R.id.confirm_pay);
         cancelButton = findViewById(R.id.cancel);
@@ -161,6 +167,34 @@ public class TransactionConfirmDialog extends BaseDialog {
         if (autoConfirm) {
             confirmAction();
         }
+
+        x2gasButton = findViewById(R.id.x2gas);
+        x3gasButton = findViewById(R.id.x3gas);
+        x5gasButton = findViewById(R.id.x5gas);
+        x2gasButton.setOnClickListener(new OneClickListener() {
+            @Override
+            public void onOneClick(View v) {
+                multiGas(2);
+            }
+        });
+        x3gasButton.setOnClickListener(new OneClickListener() {
+            @Override
+            public void onOneClick(View v) {
+                multiGas(3);
+            }
+        });
+        x5gasButton.setOnClickListener(new OneClickListener() {
+            @Override
+            public void onOneClick(View v) {
+                multiGas(5);
+            }
+        });
+    }
+
+    private void multiGas(int multi) {
+        transaction.gas.gasPrice = transaction.gas.gasPrice.multiply(BigInteger.valueOf(multi));
+        gasText.setText(transaction.gasLabel());
+        gasDetailText.setText(transaction.gasDetailLabel());
     }
 
     private void confirmAction() {

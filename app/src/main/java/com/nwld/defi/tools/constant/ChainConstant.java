@@ -62,6 +62,10 @@ public class ChainConstant {
             Chain METIS = METIS(isFirstWatch);
             chainList.add(METIS);
             chainMap.put(METIS.symbol, METIS);
+
+            Chain DOGE = DOGE(isFirstWatch);
+            chainList.add(DOGE);
+            chainMap.put(DOGE.symbol, DOGE);
         }
         return chainList;
     }
@@ -355,5 +359,27 @@ public class ChainConstant {
         return METIS;
     }
 
+    private static Chain DOGE(boolean isFirstWatch) {
+        Chain DOGE = new Chain();
+        DOGE.chainId = 2000;
+        DOGE.rpcUrl = "https://rpc02-sg.dogechain.dog";
+        DOGE.symbol = "WDOGE";
+        DOGE.decimals = 18;
+        DOGE.browser = "https://explorer.dogechain.dog";
+
+        Swap dogeSwap = new Swap();
+        dogeSwap.chain = DOGE;
+        dogeSwap.name = "DogSwap";
+        dogeSwap.tokenSymbol = "Dog";
+        dogeSwap.swapFactoryAddress = "0xD27D9d61590874Bf9ee2a19b27E265399929C9C3";
+        dogeSwap.swapRouterAddress = "0xa4EE06Ce40cb7e8c04E127c1F7D3dFB7F7039C81";
+        if (isFirstWatch) {
+            JSONArray pairList = new JSONArray();
+            pairList.put("0x5bf60eA5cF2383F407f09CF38378176298238A6C");
+            SPUtil.set(MyApp.getContext(), SwapPairWatchManager.swapFileName(dogeSwap), IntentConstant.pairs, pairList.toString());
+        }
+        DOGE.addSwap(dogeSwap);
+        return DOGE;
+    }
 
 }
